@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Configuration;
+
 namespace CoreAplicacion.CapaServicio
 {
     public class Autenticacion
