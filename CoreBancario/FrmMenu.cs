@@ -10,27 +10,28 @@ using System.Windows.Forms;
 
 namespace CoreBancario
 {
-    public partial class Login : Form
+    public partial class FrmMenu : Form
     {
-        public Login()
+        public FrmMenu()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void crearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCrearCliente crearCliente = new frmCrearCliente();
+            crearCliente.MdiParent = this;
+            crearCliente.Show();
+        }
+
+        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(txtUser.Text == "admin" && txtPass.Text == "1234")
-            {
-                FrmMenu menu = new FrmMenu();
-                this.Hide();
-                menu.Show();
-                
-            }
+            Application.Exit();
         }
     }
 }

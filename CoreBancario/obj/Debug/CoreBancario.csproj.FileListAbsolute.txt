@@ -1,0 +1,13 @@
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\CoreBancario.exe.config
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\CoreBancario.exe
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\CoreBancario.pdb
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.csproj.AssemblyReference.cache
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.FrmMenu.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.Login.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.Properties.Resources.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.csproj.GenerateResource.cache
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.csproj.CoreCompileInputs.cache
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.exe
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.pdb
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearCliente.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\cstrings.config
