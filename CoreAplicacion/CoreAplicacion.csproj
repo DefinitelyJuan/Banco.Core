@@ -72,9 +72,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapaServicio\Autenticacion.cs" />
+    <Compile Include="CapaServicio\ClienteCRUD.cs" />
     <Compile Include="CapaServicio\hacerPagos.cs" />
     <Compile Include="CapaServicio\recargas.cs" />
     <Compile Include="CapaServicio\Transaccion.cs" />
+    <Compile Include="Clases\ClienteInternetBanking.cs" />
+    <Compile Include="Clases\Cuenta.cs" />
+    <Compile Include="Clases\RolInternetBanking.cs" />
+    <Compile Include="Clases\TipoBeneficiario.cs" />
+    <Compile Include="Clases\TipoCuenta.cs" />
+    <Compile Include="Clases\TipoMoneda.cs" />
+    <Compile Include="Clases\TipoTransaccion.cs" />
+    <Compile Include="Clases\TransaccionClass.cs" />
     <Compile Include="Controlador.cs" />
     <Compile Include="Core.asmx.cs">
       <DependentUpon>Core.asmx</DependentUpon>

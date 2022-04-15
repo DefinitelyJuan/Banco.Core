@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using CoreAplicacion.Clases;
 
 namespace CoreAplicacion
 {
@@ -47,6 +48,12 @@ namespace CoreAplicacion
             Transaccion transaccion = new Transaccion();
             DataSet dataset = transaccion.TransaccionATercero(NoCuenta, Entidad, ID_TipoEntidad, ID_TipoTransaccion, DbCr, Comentario, Monto);
             return dataset;
+        }
+
+        public bool InsertarCliente(ClienteInternetBanking cliente)
+        {
+            CRUDCliente crudcliente = new CRUDCliente();
+            return crudcliente.InsertarClientes(cliente);
         }
     }
 }
