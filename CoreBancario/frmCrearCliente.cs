@@ -11,10 +11,13 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CoreBancario.CoreDataSetTableAdapters;
+using CoreBancario.Utilidades;
 namespace CoreBancario
 {
+   
     public partial class frmCrearCliente : Form
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public frmCrearCliente()
         {
             InitializeComponent();
@@ -43,14 +46,15 @@ namespace CoreBancario
                 cliente.ppInsertUsuario(int.Parse(nextid), txtUser.Text, "Cliente", txtPass.Text, txtPin.Text);
                 transaction.Commit();
                 MessageBox.Show("Cliente insertado");
-
-
+                log.Info($"Nuevo cliente y usuario insertados: {txtCedula.Text}, {txtUser}");
+                Helpers.ClearFormControls(this);
             }
             catch (Exception err)
             {
                 //Log.Info(err.Message);
                 MessageBox.Show(err.Message);
                 transaction.Rollback();
+                log.Error(err.Message);
             }
             finally
             {               
