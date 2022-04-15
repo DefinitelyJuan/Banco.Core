@@ -57,7 +57,6 @@ C:\Users\moroc\Desktop\Banco\AplicacionCaja\CoreAplicacion\bin\roslyn\vbc.rsp
 C:\Users\moroc\Desktop\Banco\AplicacionCaja\CoreAplicacion\bin\roslyn\VBCSCompiler.exe
 C:\Users\moroc\Desktop\Banco\AplicacionCaja\CoreAplicacion\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\moroc\Desktop\Banco\AplicacionCaja\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.AssemblyReference.cache
-C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.AssemblyReference.cache
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.CoreCompileInputs.cache
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.dll
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.pdb
@@ -117,3 +116,4 @@ C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\roslyn\VBCSCompiler.
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.CopyComplete
+C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.AssemblyReference.cache

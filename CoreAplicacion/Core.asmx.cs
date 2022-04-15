@@ -42,6 +42,7 @@ namespace CoreAplicacion
             DataSet dataset = recargas.TodasCuentasDiferentes(ID_Cliente);
             return dataset;
         }
+
         [WebMethod]
         public DataSet TransaccionATercero(int NoCuenta, int Entidad, int ID_TipoEntidad, int ID_TipoTransaccion, int DbCr, string Comentario, decimal Monto)
         {
@@ -50,10 +51,13 @@ namespace CoreAplicacion
             return dataset;
         }
 
-        public bool InsertarCliente(ClienteInternetBanking cliente)
+
+        [WebMethod]
+        public bool InsertarCliente(ClienteClase cliente)
         {
             CRUDCliente crudcliente = new CRUDCliente();
-            return crudcliente.InsertarClientes(cliente);
+            bool result = crudcliente.InsertarClientes(cliente);
+            return result;
         }
     }
 }

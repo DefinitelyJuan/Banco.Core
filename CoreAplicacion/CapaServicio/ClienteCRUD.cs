@@ -12,27 +12,25 @@ namespace CoreAplicacion.CapaServicio
         public string ConnectionStrings;
         SqlConnection connection = new SqlConnection();
         SqlTransaction transaction;
-        SqlCommand sqlCommand;
+        SqlCommand command;
         Controlador controlador = new Controlador();
 
-        public bool InsertarClientes(CoreAplicacion.Clases.ClienteInternetBanking cliente)
+        public bool InsertarClientes(CoreAplicacion.Clases.ClienteClase cliente)
         {
             int id = 0;
             using (SqlConnection connection = new SqlConnection(controlador.ObtenerConexion()))
             {
-                SqlCommand command = new SqlCommand("ppInsertarCliente", connection);
+                command = new SqlCommand("ppInsertCliente", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Cedula", cliente.Cedula);
-                command.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                command.Parameters.AddWithValue("@Apellido", cliente.Apellido);
-                command.Parameters.AddWithValue("@FechaNacimiento", cliente.FechaNacimiento);
-                command.Parameters.AddWithValue("@Dirección", cliente.Dirección);
-                command.Parameters.AddWithValue("@Pais", cliente.Pais);
+                command.Parameters.AddWithValue("@Cedula_Cliente", cliente.Cedula_Cliente);
+                command.Parameters.AddWithValue("@Nombre_Cliente", cliente.Nombre_Cliente);
+                command.Parameters.AddWithValue("@Direccion_Cliente", cliente.Direccion_Cliente);
                 command.Parameters.AddWithValue("@Sexo", cliente.Sexo);
-                command.Parameters.AddWithValue("@CorreoElectronico", cliente.CorreoElectronico);
-                command.Parameters.AddWithValue("@NombreUsuario", cliente.NombreUsuario);
-                command.Parameters.AddWithValue("@ContraseñaUsuario", cliente.ContraseñaUsuario);
-                command.Parameters.AddWithValue("@PIN", cliente.PIN);
+                command.Parameters.AddWithValue("@FechaNacimiento", cliente.Direccion_Cliente);
+                command.Parameters.AddWithValue("@ID_Provincia", cliente.IDProvincia);
+                command.Parameters.AddWithValue("@ID_Municipio", cliente.IDMunicipio);
+                command.Parameters.AddWithValue("@ID_Sector", cliente.IDSector);
+                command.Parameters.AddWithValue("@IngresosMensuales", cliente.IngresosMensuales);
                 try
                 {
                     connection.Open();
