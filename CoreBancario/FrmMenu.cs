@@ -19,9 +19,7 @@ namespace CoreBancario
 
         private void crearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCrearCliente crearCliente = new frmCrearCliente();
-            crearCliente.MdiParent = this;
-            crearCliente.Show();
+
         }
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,6 +30,13 @@ namespace CoreBancario
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void crearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCrearCliente crearCliente = new frmCrearCliente();
+            crearCliente.MdiParent = this;
+            crearCliente.Show();
         }
     }
 }

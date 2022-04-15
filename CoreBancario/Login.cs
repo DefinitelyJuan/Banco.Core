@@ -24,7 +24,7 @@ namespace CoreBancario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(txtUser.Text == "admin" && txtPass.Text == "1234")
+            if(txtUser.Text == "a" && txtPass.Text == "1")
             {
                 FrmMenu menu = new FrmMenu();
                 this.Hide();

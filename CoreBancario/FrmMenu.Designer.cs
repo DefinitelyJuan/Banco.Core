@@ -30,24 +30,24 @@ namespace CoreBancario
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.prestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipoTransaccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mostrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mostrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.prestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoTransaccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,48 +73,6 @@ namespace CoreBancario
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // clientesToolStripMenuItem
-            // 
-            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem1,
-            this.verToolStripMenuItem,
-            this.editarToolStripMenuItem1,
-            this.eliminarToolStripMenuItem1});
-            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.clientesToolStripMenuItem.Text = "Clientes";
-            // 
-            // cuentasToolStripMenuItem
-            // 
-            this.cuentasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem2,
-            this.mostrarToolStripMenuItem1,
-            this.editarToolStripMenuItem2,
-            this.eliminarToolStripMenuItem2});
-            this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
-            this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.cuentasToolStripMenuItem.Text = "Cuentas";
-            this.cuentasToolStripMenuItem.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
-            // 
-            // prestamosToolStripMenuItem
-            // 
-            this.prestamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mostrarToolStripMenuItem2});
-            this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
-            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.prestamosToolStripMenuItem.Text = "Prestamos";
-            // 
-            // tipoTransaccionToolStripMenuItem
-            // 
-            this.tipoTransaccionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem4,
-            this.mostrarToolStripMenuItem3,
-            this.editarToolStripMenuItem3,
-            this.eliminarToolStripMenuItem3});
-            this.tipoTransaccionToolStripMenuItem.Name = "tipoTransaccionToolStripMenuItem";
-            this.tipoTransaccionToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
-            this.tipoTransaccionToolStripMenuItem.Text = "Tipo Transaccion";
-            // 
             // perfilesToolStripMenuItem
             // 
             this.perfilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -129,33 +87,45 @@ namespace CoreBancario
             // crearToolStripMenuItem
             // 
             this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
-            this.crearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.crearToolStripMenuItem.Text = "Crear";
             this.crearToolStripMenuItem.Click += new System.EventHandler(this.crearToolStripMenuItem_Click);
+            // 
+            // mostrarToolStripMenuItem
+            // 
+            this.mostrarToolStripMenuItem.Name = "mostrarToolStripMenuItem";
+            this.mostrarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.mostrarToolStripMenuItem.Text = "Mostrar";
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.editarToolStripMenuItem.Text = "Editar";
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             // 
-            // mostrarToolStripMenuItem
+            // clientesToolStripMenuItem
             // 
-            this.mostrarToolStripMenuItem.Name = "mostrarToolStripMenuItem";
-            this.mostrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mostrarToolStripMenuItem.Text = "Mostrar";
+            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem1,
+            this.verToolStripMenuItem,
+            this.editarToolStripMenuItem1,
+            this.eliminarToolStripMenuItem1});
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // crearToolStripMenuItem1
             // 
             this.crearToolStripMenuItem1.Name = "crearToolStripMenuItem1";
             this.crearToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.crearToolStripMenuItem1.Text = "Crear";
+            this.crearToolStripMenuItem1.Click += new System.EventHandler(this.crearToolStripMenuItem1_Click);
             // 
             // verToolStripMenuItem
             // 
@@ -175,58 +145,89 @@ namespace CoreBancario
             this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eliminarToolStripMenuItem1.Text = "Eliminar";
             // 
+            // cuentasToolStripMenuItem
+            // 
+            this.cuentasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem2,
+            this.mostrarToolStripMenuItem1,
+            this.editarToolStripMenuItem2,
+            this.eliminarToolStripMenuItem2});
+            this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
+            this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.cuentasToolStripMenuItem.Text = "Cuentas";
+            this.cuentasToolStripMenuItem.Click += new System.EventHandler(this.cuentasToolStripMenuItem_Click);
+            // 
             // crearToolStripMenuItem2
             // 
             this.crearToolStripMenuItem2.Name = "crearToolStripMenuItem2";
-            this.crearToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
             this.crearToolStripMenuItem2.Text = "Crear";
             // 
             // mostrarToolStripMenuItem1
             // 
             this.mostrarToolStripMenuItem1.Name = "mostrarToolStripMenuItem1";
-            this.mostrarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.mostrarToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.mostrarToolStripMenuItem1.Text = "Mostrar";
             // 
             // editarToolStripMenuItem2
             // 
             this.editarToolStripMenuItem2.Name = "editarToolStripMenuItem2";
-            this.editarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
             this.editarToolStripMenuItem2.Text = "Editar";
             // 
             // eliminarToolStripMenuItem2
             // 
             this.eliminarToolStripMenuItem2.Name = "eliminarToolStripMenuItem2";
-            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
             this.eliminarToolStripMenuItem2.Text = "Eliminar";
+            // 
+            // prestamosToolStripMenuItem
+            // 
+            this.prestamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mostrarToolStripMenuItem2});
+            this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
+            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.prestamosToolStripMenuItem.Text = "Prestamos";
             // 
             // mostrarToolStripMenuItem2
             // 
             this.mostrarToolStripMenuItem2.Name = "mostrarToolStripMenuItem2";
-            this.mostrarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.mostrarToolStripMenuItem2.Size = new System.Drawing.Size(115, 22);
             this.mostrarToolStripMenuItem2.Text = "Mostrar";
+            // 
+            // tipoTransaccionToolStripMenuItem
+            // 
+            this.tipoTransaccionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem4,
+            this.mostrarToolStripMenuItem3,
+            this.editarToolStripMenuItem3,
+            this.eliminarToolStripMenuItem3});
+            this.tipoTransaccionToolStripMenuItem.Name = "tipoTransaccionToolStripMenuItem";
+            this.tipoTransaccionToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.tipoTransaccionToolStripMenuItem.Text = "Tipo Transaccion";
             // 
             // crearToolStripMenuItem4
             // 
             this.crearToolStripMenuItem4.Name = "crearToolStripMenuItem4";
-            this.crearToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem4.Size = new System.Drawing.Size(117, 22);
             this.crearToolStripMenuItem4.Text = "Crear";
             // 
             // mostrarToolStripMenuItem3
             // 
             this.mostrarToolStripMenuItem3.Name = "mostrarToolStripMenuItem3";
-            this.mostrarToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.mostrarToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.mostrarToolStripMenuItem3.Text = "Mostrar";
             // 
             // editarToolStripMenuItem3
             // 
             this.editarToolStripMenuItem3.Name = "editarToolStripMenuItem3";
-            this.editarToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.editarToolStripMenuItem3.Text = "Editar";
             // 
             // eliminarToolStripMenuItem3
             // 
             this.eliminarToolStripMenuItem3.Name = "eliminarToolStripMenuItem3";
-            this.eliminarToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.eliminarToolStripMenuItem3.Text = "Eliminar";
             // 
             // transaccionesToolStripMenuItem
@@ -240,7 +241,7 @@ namespace CoreBancario
             // verToolStripMenuItem1
             // 
             this.verToolStripMenuItem1.Name = "verToolStripMenuItem1";
-            this.verToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.verToolStripMenuItem1.Size = new System.Drawing.Size(90, 22);
             this.verToolStripMenuItem1.Text = "Ver";
             // 
             // button1

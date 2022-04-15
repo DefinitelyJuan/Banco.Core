@@ -11,3 +11,4 @@ C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.exe
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.pdb
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearCliente.resources
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\cstrings.config
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearPerfil.resources
