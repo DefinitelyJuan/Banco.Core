@@ -14,5 +14,12 @@ namespace CoreAplicacion
             string connection = ConfigurationManager.ConnectionStrings["cnCore"].ConnectionString;
             return connection;
         }
+
+        public string ObtenerConexionBackup()
+        {
+
+            string connection = ConfigurationManager.ConnectionStrings["cnBackup"].ConnectionString;
+            return connection;
+        }
     }
 }

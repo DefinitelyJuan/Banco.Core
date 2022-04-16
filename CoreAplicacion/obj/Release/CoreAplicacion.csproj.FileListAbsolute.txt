@@ -117,3 +117,5 @@ C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Release\CoreAplicaci
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Release\CoreAplicacion.csproj.CopyComplete
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Release\CoreAplicacion.dll
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Release\CoreAplicacion.pdb
+C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.dll
+C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.xml

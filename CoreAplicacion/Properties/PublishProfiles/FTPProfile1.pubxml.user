@@ -8,17 +8,20 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOVLbkK7AcEyrOiHacx7sUQAAAAACAAAAAAAQZgAAAAEAACAAAAD+N8wYPtSK1tSIWF4tMWcju87s05f+o2GMCxcPPu6jzAAAAAAOgAAAAAIAACAAAACbiIPD6vNRiVIB672F1vIRWQoppGafUorc2UbUzjdd0yAAAAAJmMFXo44fw971k8A33cJtBywjIrSFfPqymq7DxnrGkkAAAAAe3bNgc1gFztdgW2pc2PUOvHGwLB3mqpffNwRuVRHkGp1Izv8UJJyyGgnuTeAPwiD7IynHwuS7XienePVzKTsl</EncryptedPassword>
     <_PublishTargetUrl>ftp://coreaplicacion.somee.com/www.CoreAplicacion.somee.com</_PublishTargetUrl>
-    <History>True|2022-04-15T06:36:01.9249690Z;True|2022-04-15T02:00:38.6358959-04:00;True|2022-04-15T01:54:56.6518503-04:00;True|2022-04-15T01:53:37.8721033-04:00;True|2022-04-15T01:51:42.0769616-04:00;True|2022-04-15T01:50:51.1758671-04:00;True|2022-04-15T01:49:24.4669729-04:00;True|2022-04-15T01:48:10.9277095-04:00;True|2022-04-15T01:46:56.3095041-04:00;True|2022-04-15T01:39:36.2317870-04:00;False|2022-04-15T01:38:47.7453512-04:00;True|2022-04-14T23:28:07.0920007-04:00;True|2022-04-14T23:24:16.6351829-04:00;True|2022-04-14T23:06:37.6570960-04:00;True|2022-04-14T22:54:52.7383859-04:00;</History>
+    <History>True|2022-04-16T07:21:48.5240019Z;True|2022-04-16T03:16:05.2240337-04:00;True|2022-04-16T03:08:55.9102863-04:00;True|2022-04-16T02:46:33.5666137-04:00;True|2022-04-15T02:36:01.9249690-04:00;True|2022-04-15T02:00:38.6358959-04:00;True|2022-04-15T01:54:56.6518503-04:00;True|2022-04-15T01:53:37.8721033-04:00;True|2022-04-15T01:51:42.0769616-04:00;True|2022-04-15T01:50:51.1758671-04:00;True|2022-04-15T01:49:24.4669729-04:00;True|2022-04-15T01:48:10.9277095-04:00;True|2022-04-15T01:46:56.3095041-04:00;True|2022-04-15T01:39:36.2317870-04:00;False|2022-04-15T01:38:47.7453512-04:00;True|2022-04-14T23:28:07.0920007-04:00;True|2022-04-14T23:24:16.6351829-04:00;True|2022-04-14T23:06:37.6570960-04:00;True|2022-04-14T22:54:52.7383859-04:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CoreAplicacion.dll">
-      <publishTime>04/15/2022 02:35:47</publishTime>
+      <publishTime>04/16/2022 03:21:31</publishTime>
     </File>
     <File Include="bin/CoreAplicacion.pdb">
-      <publishTime>04/15/2022 02:35:47</publishTime>
+      <publishTime>04/16/2022 03:21:31</publishTime>
     </File>
     <File Include="bin/cstrings.config">
-      <publishTime>04/14/2022 22:40:20</publishTime>
+      <publishTime>04/16/2022 00:06:43</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>12/17/2021 10:45:06</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/09/2018 16:10:50</publishTime>
@@ -174,7 +177,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>04/06/2022 22:05:56</publishTime>
     </File>
     <File Include="cstrings.config">
-      <publishTime>04/14/2022 22:40:20</publishTime>
+      <publishTime>04/16/2022 00:06:43</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>04/15/2022 01:54:44</publishTime>

@@ -10,6 +10,7 @@ namespace CoreAplicacion.CapaServicio
 {
     public class Autenticacion
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public string ConnectionStrings;
         public SqlConnection Connection;
         SqlCommand sqlCommand;
@@ -17,22 +18,70 @@ namespace CoreAplicacion.CapaServicio
         {
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
-            ConnectionStrings = controlador.ObtenerConexion();
-            Connection.ConnectionString = ConnectionStrings;
-            Connection.Open();
-            int ID_Cliente = 0;
-            SqlDataReader reader = Autenticar(Usuario, Contraseña, Pin);
+            try
+            { 
+                ConnectionStrings = controlador.ObtenerConexion();
+                Connection.ConnectionString = ConnectionStrings;
+                Connection.Open();
+                int ID_Cliente = 0;
+                SqlDataReader reader = Autenticar(Usuario, Contraseña, Pin);
+
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    ID_Cliente = int.Parse(reader["ID_Cliente"].ToString());
+                }
+                reader.Close();
+                DataSet Auth = TodoslosDatosCliente(ID_Cliente);
+                Connection.Close();
+                return Auth;
+            }
+            catch (Exception err)
+            {
+                log.Error(err.Message);
+                try
+                {
+                    ConnectionStrings = controlador.ObtenerConexionBackup();
+                    Connection.ConnectionString = ConnectionStrings;
+                    Connection.Open();
+                    int ID_Cliente = 0;
+                    SqlDataReader reader = Autenticar(Usuario, Contraseña, Pin);
+
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        ID_Cliente = int.Parse(reader["ID_Cliente"].ToString());
+                    }
+                    reader.Close();
+                    DataSet Auth = TodoslosDatosCliente(ID_Cliente);
+                    Connection.Close();
+                    return Auth;
+                }
+                catch (Exception error)
+                {
+                    log.Error(error.Message);
+                    DataSet auth = new DataSet();
+                    return auth;
+                }
+            }
+            //ConnectionStrings = controlador.ObtenerConexion();
+            //Connection.ConnectionString = ConnectionStrings;
+            //Connection.Open();
+            //int ID_Cliente = 0;
+            //SqlDataReader reader = Autenticar(Usuario, Contraseña, Pin);
             
 
-            if (reader.HasRows)
-            {
-                reader.Read();
-                ID_Cliente = int.Parse(reader["ID_Cliente"].ToString());
-            }
-            reader.Close();
-            DataSet Auth = TodoslosDatosCliente(ID_Cliente);
-            Connection.Close();
-            return Auth;
+            //if (reader.HasRows)
+            //{
+            //    reader.Read();
+            //    ID_Cliente = int.Parse(reader["ID_Cliente"].ToString());
+            //}
+            //reader.Close();
+            //DataSet Auth = TodoslosDatosCliente(ID_Cliente);
+            //Connection.Close();
+            //return Auth;
         }
         public DataSet TodoslosDatosCliente(int ID_Cliente)
         {
