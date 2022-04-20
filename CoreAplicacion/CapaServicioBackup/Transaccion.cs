@@ -13,12 +13,19 @@ namespace CoreAplicacion.CapaServicioBackup
         SqlConnection Connection;
         SqlTransaction transaction;
         SqlCommand sqlCommand;
-        public DataSet transaccion(int ID_TipoTransaccion, int DbCr, string Comentario, int NoCuenta, decimal Monto)
+        public DataSet transaccion(int ID_TipoTransaccion, int DbCr, string Comentario, int NoCuenta, decimal Monto, bool backingup)
         {
             DataSet dataSet = null;
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
-            ConnectionStrings = controlador.ObtenerConexion();
+            if (backingup)
+            {
+                ConnectionStrings = controlador.ObtenerConexion();
+            }
+            else
+            {
+                ConnectionStrings = controlador.ObtenerConexionBackup();
+            }
             Connection.ConnectionString = ConnectionStrings;
             Connection.Open();
             transaction = Connection.BeginTransaction();
@@ -134,17 +141,26 @@ namespace CoreAplicacion.CapaServicioBackup
             }
             return dataset;
         }
-        public DataSet TransaccionATercero(int NoCuenta, int Entidad, int ID_TipoEntidad, int ID_TipoTransaccion, int DbCr, string Comentario, decimal Monto)
+        public DataSet TransaccionATercero(int NoCuenta, int Entidad, int ID_TipoEntidad, int ID_TipoTransaccion, int DbCr, string Comentario, decimal Monto, bool backingup)
         {
             DataSet dataset = new DataSet();
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
-            ConnectionStrings = controlador.ObtenerConexion();
+            if (backingup)
+            {
+                ConnectionStrings = controlador.ObtenerConexion();
+            }
+            else
+            {
+                ConnectionStrings = controlador.ObtenerConexionBackup();
+            }            
             Connection.ConnectionString = ConnectionStrings;
             Connection.Open();
             transaction = Connection.BeginTransaction();
             int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
-            if(completado == 1)
+            //adapter.Insert(JsonSerializer.Serialize(transaccionbackup), "Pendiente",3);
+            //adaptadorbackup.insert(json, "Pendiente", 3) a lo mejor (json seria serializado antes)
+            if (completado == 1)
             {
                 if(DbCr == 2)
                     dataset = ActualizarNoCuentaNTP(completado, Entidad, ID_TipoEntidad, NoCuenta, 0, DbCr);

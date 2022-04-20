@@ -44,7 +44,7 @@ namespace CoreAplicacion.CapaServicioBackup
             //    storedProcedureName = stored[0];
             DataSet Auth = new DataSet();
             sqlCommand = new SqlCommand();
-            sqlCommand.CommandText = "ppGetAll";
+            sqlCommand.CommandText = "ppGetAllNet";
             sqlCommand.Parameters.AddWithValue("@ID_Cliente", ID_Cliente);
             sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
             sqlCommand.Connection = Connection;

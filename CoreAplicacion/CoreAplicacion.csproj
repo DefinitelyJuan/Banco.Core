@@ -103,20 +103,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapaServicioBackup\Autenticacion.cs" />
+    <Compile Include="CapaServicioBackup\backupinfo.cs" />
     <Compile Include="CapaServicioBackup\hacerPagos.cs" />
+    <Compile Include="CapaServicioBackup\InsertBeneficiario.cs" />
     <Compile Include="CapaServicioBackup\recargas.cs" />
     <Compile Include="CapaServicioBackup\Transaccion.cs" />
     <Compile Include="CapaServicio\Autenticacion.cs" />
     <Compile Include="CapaServicio\ClienteCRUD.cs" />
     <Compile Include="CapaServicio\hacerPagos.cs" />
+    <Compile Include="CapaServicio\InsertBeneficiario.cs" />
     <Compile Include="CapaServicio\recargas.cs" />
     <Compile Include="CapaServicio\Transaccion.cs" />
+    <Compile Include="Clases\BeneficiarioClase.cs" />
     <Compile Include="Clases\ClienteClase.cs" />
+    <Compile Include="Clases\NoCuentaClase.cs" />
+    <Compile Include="Clases\PagoClase.cs" />
+    <Compile Include="Clases\PrestamoClase.cs" />
+    <Compile Include="Clases\TransaccionesClase.cs" />
+    <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Controlador.cs" />
     <Compile Include="Core.asmx.cs">
       <DependentUpon>Core.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="JsonClases\BeneficiarioInsert.cs" />
+    <Compile Include="JsonClases\TransaccionMismaCuenta.cs" />
+    <Compile Include="JsonClases\TransaccionTercero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
