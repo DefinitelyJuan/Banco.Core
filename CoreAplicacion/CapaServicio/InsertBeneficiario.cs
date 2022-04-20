@@ -77,35 +77,6 @@ namespace CoreAplicacion.CapaServicio
 
             }
         }
-        public int InsertBeneficiarioEnBackups(string cn, BeneficiarioInsert beneficiario)
-        {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
-            int response = 0;
-            try
-            {
-                Connection.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = Connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ppInsertBackup";
-                cmd.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(beneficiario)); 
-                cmd.Parameters.AddWithValue("@estado", "Pendiente"); 
-                cmd.Parameters.AddWithValue("@tipo", 3); 
-                response = cmd.ExecuteNonQuery();
-                return response;
-            }
-            catch (Exception err)
-            {
-                log.Error(err.Message);
-                return response;
-            }
-            finally
-            {
-                Connection.Close();
-
-            }
-        }
 
     }
 }
