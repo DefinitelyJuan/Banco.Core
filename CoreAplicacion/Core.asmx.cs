@@ -33,6 +33,55 @@ namespace CoreAplicacion
                 {
                     Autenticacion autenticacion = new Autenticacion();
                     DataSet auth = autenticacion.Autenticarse(usuario, contraseña, pin);
+
+                    //Bloque de carga del backup
+                    Controlador controlador = new Controlador();
+                    getbackupjson backupInfo = new getbackupjson();
+                    TransaccionBackup transaccionBackup = new TransaccionBackup();
+                    DataSet backup = backupInfo.backupdata();
+                    if (backup.Tables.Count != 0)
+                    {
+                        DataTable tableBackup = backup.Tables[0];                      
+                        TransaccionMismaCuenta transactMismaCuenta = new TransaccionMismaCuenta();
+                        TransaccionTercero transact3ero = new TransaccionTercero();
+                        BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
+                        foreach (DataRow row in tableBackup.Rows)
+                        {
+                            switch (row[3].ToString())
+                            {
+                                case "0": //transaccion misma cuenta
+                                    {
+                                        transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
+                                        //TODO: Insert de la bd (usar dataset si deja el profe)
+                                        //el todo seria lo de abajo, es EXPERIMENTAL
+                                        transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
+                                        break;
+                                    }
+                                case "1": //transaccion 3ero
+                                    {
+
+                                        transact3ero = JsonSerializer.Deserialize<TransaccionTercero>(row[1].ToString());
+                                        transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
+                                        break;
+                                    }
+                                case "2": //insert beneficiario
+                                    {
+                                        beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
+                                        InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
+                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+
+
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        throw new Exception("Error");
+                                    }
+                            }
+                        }
+                    }
+                    //Bloque de carga del backup
+
                     return auth;
                 }
                 catch (Exception err)
@@ -68,6 +117,55 @@ namespace CoreAplicacion
                     Transaccion transaccion = new Transaccion();
                     DataSet dataset;
                     dataset = transaccion.transaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
+
+                    //Bloque de carga del backup
+                    Controlador controlador = new Controlador();
+                    getbackupjson backupInfo = new getbackupjson();
+                    TransaccionBackup transaccionBackup = new TransaccionBackup();
+                    DataSet backup = backupInfo.backupdata();
+                    if (backup.Tables.Count != 0)
+                    {
+                        DataTable tableBackup = backup.Tables[0];
+                        TransaccionMismaCuenta transactMismaCuenta = new TransaccionMismaCuenta();
+                        TransaccionTercero transact3ero = new TransaccionTercero();
+                        BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
+                        foreach (DataRow row in tableBackup.Rows)
+                        {
+                            switch (row[3].ToString())
+                            {
+                                case "0": //transaccion misma cuenta
+                                    {
+                                        transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
+                                        //TODO: Insert de la bd (usar dataset si deja el profe)
+                                        //el todo seria lo de abajo, es EXPERIMENTAL
+                                        transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
+                                        break;
+                                    }
+                                case "1": //transaccion 3ero
+                                    {
+
+                                        transact3ero = JsonSerializer.Deserialize<TransaccionTercero>(row[1].ToString());
+                                        transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
+                                        break;
+                                    }
+                                case "2": //insert beneficiario
+                                    {
+                                        beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
+                                        InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
+                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+
+
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        throw new Exception("Error");
+                                    }
+                            }
+                        }
+                    }
+                    //Bloque de carga del backup
+
                     return dataset;
                 }
                 catch(Exception err)
@@ -103,6 +201,55 @@ namespace CoreAplicacion
                 {
                     recargas recargas = new recargas();
                     DataSet dataset = recargas.TodasCuentasDiferentes(ID_Cliente);
+
+                    //Bloque de carga del backup
+                    Controlador controlador = new Controlador();
+                    getbackupjson backupInfo = new getbackupjson();
+                    TransaccionBackup transaccionBackup = new TransaccionBackup();
+                    DataSet backup = backupInfo.backupdata();
+                    if (backup.Tables.Count != 0)
+                    {
+                        DataTable tableBackup = backup.Tables[0];
+                        TransaccionMismaCuenta transactMismaCuenta = new TransaccionMismaCuenta();
+                        TransaccionTercero transact3ero = new TransaccionTercero();
+                        BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
+                        foreach (DataRow row in tableBackup.Rows)
+                        {
+                            switch (row[3].ToString())
+                            {
+                                case "0": //transaccion misma cuenta
+                                    {
+                                        transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
+                                        //TODO: Insert de la bd (usar dataset si deja el profe)
+                                        //el todo seria lo de abajo, es EXPERIMENTAL
+                                        transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
+                                        break;
+                                    }
+                                case "1": //transaccion 3ero
+                                    {
+
+                                        transact3ero = JsonSerializer.Deserialize<TransaccionTercero>(row[1].ToString());
+                                        transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
+                                        break;
+                                    }
+                                case "2": //insert beneficiario
+                                    {
+                                        beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
+                                        InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
+                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+
+
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        throw new Exception("Error");
+                                    }
+                            }
+                        }
+                    }
+                    //Bloque de carga del backup
+
                     return dataset;
                 }
                 catch (Exception err)
@@ -259,20 +406,6 @@ namespace CoreAplicacion
         }
 
         [WebMethod]
-        public bool InsertarCliente(ClienteClase cliente, string clave)
-        {
-            if (clave == "Droog ethereal develop 269138")
-            {
-                CRUDCliente crudcliente = new CRUDCliente();
-                bool result = crudcliente.InsertarClientes(cliente);
-                return result;
-            }
-            else
-                return false;
-            
-        }
-
-        [WebMethod]
         public bool InsertarBeneficiario(int ID_Beneficiario, int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente, string clave)
         {
             if (clave == "Droog ethereal develop 269138")
@@ -282,6 +415,54 @@ namespace CoreAplicacion
                 {
                     InsertBeneficiario beneficiariohandler = new InsertBeneficiario();
                     result = beneficiariohandler.Insert(ID_Beneficiario, NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
+
+                    //Bloque de carga del backup
+                    Controlador controlador = new Controlador();
+                    getbackupjson backupInfo = new getbackupjson();
+                    TransaccionBackup transaccionBackup = new TransaccionBackup();
+                    DataSet backup = backupInfo.backupdata();
+                    if (backup.Tables.Count != 0)
+                    {
+                        DataTable tableBackup = backup.Tables[0];
+                        TransaccionMismaCuenta transactMismaCuenta = new TransaccionMismaCuenta();
+                        TransaccionTercero transact3ero = new TransaccionTercero();
+                        BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
+                        foreach (DataRow row in tableBackup.Rows)
+                        {
+                            switch (row[3].ToString())
+                            {
+                                case "0": //transaccion misma cuenta
+                                    {
+                                        transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
+                                        //TODO: Insert de la bd (usar dataset si deja el profe)
+                                        //el todo seria lo de abajo, es EXPERIMENTAL
+                                        transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
+                                        break;
+                                    }
+                                case "1": //transaccion 3ero
+                                    {
+
+                                        transact3ero = JsonSerializer.Deserialize<TransaccionTercero>(row[1].ToString());
+                                        transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
+                                        break;
+                                    }
+                                case "2": //insert beneficiario
+                                    {
+                                        beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
+                                        InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
+                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+
+
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        throw new Exception("Error");
+                                    }
+                            }
+                        }
+                    }
+                    //Bloque de carga del backup
                 }
                 catch (Exception err)
                 {
