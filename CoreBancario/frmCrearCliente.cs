@@ -65,11 +65,8 @@ namespace CoreBancario
 
         private void frmCrearCliente_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'coreDataSet.Sector' Puede moverla o quitarla según sea necesario.
             this.sectorTableAdapter.Fill(this.coreDataSet.Sector);
-            // TODO: esta línea de código carga datos en la tabla 'coreDataSet.Municipio' Puede moverla o quitarla según sea necesario.
             this.municipioTableAdapter.Fill(this.coreDataSet.Municipio);
-            // TODO: esta línea de código carga datos en la tabla 'coreDataSet.Provincia' Puede moverla o quitarla según sea necesario.
             this.provinciaTableAdapter.Fill(this.coreDataSet.Provincia);
 
         }

@@ -6,6 +6,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
 
+
 namespace CoreAplicacion.CapaServicio
 {
     public class Autenticacion
@@ -108,4 +109,5 @@ namespace CoreAplicacion.CapaServicio
             return datareader;
         }
     }
+        
 }
