@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CoreAplicacion.JsonClases;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.Json;
 using System.Web;
 
 namespace CoreAplicacion.CapaServicioBackup
@@ -13,6 +15,7 @@ namespace CoreAplicacion.CapaServicioBackup
         SqlConnection Connection;
         SqlTransaction transaction;
         SqlCommand sqlCommand;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public DataSet transaccion(int ID_TipoTransaccion, int DbCr, string Comentario, int NoCuenta, decimal Monto, bool backingup)
         {
             DataSet dataSet = null;
@@ -31,6 +34,14 @@ namespace CoreAplicacion.CapaServicioBackup
             transaction = Connection.BeginTransaction();
             int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
             dataSet = ActualizarNoCuenta(completado, NoCuenta, Monto, DbCr);
+            //TODO: InsertBackup tipo = 0  aqui con todo lo que se envio (osea, serializar objeto tipo transaccionmismapersona).(debajo)
+            TransaccionMismaCuenta mismacuenta = new TransaccionMismaCuenta();
+            mismacuenta.ID_TipoTransaccion = ID_TipoTransaccion;
+            mismacuenta.DbCr = DbCr;
+            mismacuenta.comentario = Comentario;
+            mismacuenta.NoCuenta = NoCuenta;
+            mismacuenta.Monto = Monto;
+            InsertTransaccionMismaCuentaEnBackups(ConnectionStrings, mismacuenta);
             transaction.Commit();
             Connection.Close();
             return dataSet;
@@ -50,7 +61,9 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 respuesta = sqlCommand.ExecuteNonQuery();
             }
-            catch{
+            catch(Exception err)
+            {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
             return respuesta;
@@ -72,8 +85,9 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 respuesta = sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception err)
             {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
             return respuesta;
@@ -92,8 +106,9 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 da.Fill(dataset);
             }
-            catch
+            catch(Exception err)
             {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
            
@@ -114,8 +129,9 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 da.Fill(dataset);
             }
-            catch
+            catch(Exception err)
             {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
             return dataset;
@@ -135,8 +151,9 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 da.Fill(dataset);
             }
-            catch
+            catch(Exception err)
             {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
             return dataset;
@@ -157,9 +174,7 @@ namespace CoreAplicacion.CapaServicioBackup
             Connection.ConnectionString = ConnectionStrings;
             Connection.Open();
             transaction = Connection.BeginTransaction();
-            int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
-            //adapter.Insert(JsonSerializer.Serialize(transaccionbackup), "Pendiente",3);
-            //adaptadorbackup.insert(json, "Pendiente", 3) a lo mejor (json seria serializado antes)
+            int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);            
             if (completado == 1)
             {
                 if(DbCr == 2)
@@ -170,6 +185,16 @@ namespace CoreAplicacion.CapaServicioBackup
             }
             if(completado == 1 && dataset.Tables.Count == 3)
                 ActualizarNoCuentaNTP(completado,NoCuenta, ID_TipoEntidad, Entidad, Monto, 1);
+            //TODO: InsertBackup tipo = 1 aqui con todo lo que se envio (osea, serializar objeto tipo transaccion 3ero). abajo (EXPERIMENTAL)
+            TransaccionTercero tercero = new TransaccionTercero();
+            tercero.NoCuenta = NoCuenta;
+            tercero.Entidad = Entidad;
+            tercero.ID_TipoEntidad = ID_TipoEntidad;
+            tercero.ID_TipoTransaccion = ID_TipoTransaccion;
+            tercero.DbCr = DbCr;
+            tercero.Comentario = Comentario;
+            tercero.Monto = Monto;
+            InsertTransaccion3eroEnBackups(ConnectionStrings, tercero);
             transaction.Commit();
             Connection.Close();
             return dataset;
@@ -222,11 +247,70 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 respuesta = sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception err)
             {
+                log.Error(err.Message);
                 transaction.Rollback();
             }
             return respuesta;
+        }
+        public int InsertTransaccionMismaCuentaEnBackups(string cn, TransaccionMismaCuenta mismacuenta)
+        {
+            Connection = new SqlConnection();
+            Connection.ConnectionString = cn;
+            int response = 0;
+            try
+            {
+                Connection.Open();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = Connection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "ppInsertBackup";
+                sqlCommand.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(mismacuenta));
+                sqlCommand.Parameters.AddWithValue("@estado", "Pendiente");
+                sqlCommand.Parameters.AddWithValue("@tipo", 0);
+                response = sqlCommand.ExecuteNonQuery();
+                return response;
+            }
+            catch (Exception err)
+            {
+                log.Error(err.Message);
+                return response;
+            }
+            finally
+            {
+                Connection.Close();
+
+            }
+        }
+        public int InsertTransaccion3eroEnBackups(string cn, TransaccionTercero tercero)
+        {
+            Connection = new SqlConnection();
+            Connection.ConnectionString = cn;
+            int response = 0;
+            try
+            {
+                Connection.Open();
+                sqlCommand = new SqlCommand();
+                sqlCommand.Connection = Connection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "ppInsertBackup";
+                sqlCommand.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(tercero));
+                sqlCommand.Parameters.AddWithValue("@estado", "Pendiente");
+                sqlCommand.Parameters.AddWithValue("@tipo", 1);
+                response = sqlCommand.ExecuteNonQuery();
+                return response;
+            }
+            catch (Exception err)
+            {
+                log.Error(err.Message);
+                return response;
+            }
+            finally
+            {
+                Connection.Close();
+
+            }
         }
     }
 }

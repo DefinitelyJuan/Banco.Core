@@ -4,6 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using CoreAplicacion.JsonClases;
+using System.Text.Json;
+
 namespace CoreAplicacion.CapaServicioBackup
 {
     public class InsertBeneficiarioBackup
@@ -17,6 +20,13 @@ namespace CoreAplicacion.CapaServicioBackup
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
             int response = 0;
+            BeneficiarioInsert beneficiario = new BeneficiarioInsert();
+            beneficiario.NoCuenta = NoCuenta;
+            beneficiario.id_beneficiario = ID_Beneficiario;
+            beneficiario.ID_TipoBeneficiario = ID_TipoBeneficiario;
+            beneficiario.nombre = Nombre;
+            beneficiario.ID_Cliente = ID_Cliente;
+
             if (backingup)
             {
                 ConnectionStrings = controlador.ObtenerConexion(); //Obtengo conexion del core
@@ -28,12 +38,11 @@ namespace CoreAplicacion.CapaServicioBackup
             Connection.ConnectionString = ConnectionStrings;
             try
             {
-                Connection.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = Connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ppInsertBeneficiario";
-                response = cmd.ExecuteNonQuery();
+                ExecuteCommand(ConnectionStrings,beneficiario);
+                if(ConnectionStrings == controlador.ObtenerConexionBackup())
+                {
+                    InsertBeneficiarioEnBackups(ConnectionStrings, beneficiario);
+                }
             }
             catch(Exception err)
             {
@@ -49,6 +58,65 @@ namespace CoreAplicacion.CapaServicioBackup
             else
                 return false;
         }
+        public int ExecuteCommand(string cn, BeneficiarioInsert beneficiario)
+        {
+            Connection = new SqlConnection();
+            Connection.ConnectionString = cn;
+            int response = 0;
+            try
+            {
+                Connection.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = Connection;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ppInsertBeneficiario";
+                cmd.Parameters.AddWithValue("@ID_Beneficiario", beneficiario.id_beneficiario);
+                cmd.Parameters.AddWithValue("@NoCuenta", beneficiario.NoCuenta);
+                cmd.Parameters.AddWithValue("@ID_TipoBeneficiario", beneficiario.ID_TipoBeneficiario);
+                cmd.Parameters.AddWithValue("@Nombre", beneficiario.nombre);
+                cmd.Parameters.AddWithValue("@ID_Cliente", beneficiario.ID_Cliente);
+                response = cmd.ExecuteNonQuery();
+                return response;
+            }
+            catch (Exception err)
+            {
+                log.Error(err.Message);
+                return response;
+            }
+            finally
+            {
+                Connection.Close();
 
+            }
+        }
+        public int InsertBeneficiarioEnBackups(string cn, BeneficiarioInsert beneficiario)
+        {
+            Connection = new SqlConnection();
+            Connection.ConnectionString = cn;
+            int response = 0;
+            try
+            {
+                Connection.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = Connection;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ppInsertBackup";
+                cmd.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(beneficiario));
+                cmd.Parameters.AddWithValue("@estado", "Pendiente");
+                cmd.Parameters.AddWithValue("@tipo", 2);
+                response = cmd.ExecuteNonQuery();
+                return response;
+            }
+            catch (Exception err)
+            {
+                log.Error(err.Message);
+                return response;
+            }
+            finally
+            {
+                Connection.Close();
+
+            }
+        }
     }
 }
