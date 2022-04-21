@@ -34,3 +34,9 @@ C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\System.Text.Enco
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\System.Text.Json.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\bin\Debug\System.ValueTuple.xml
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.VerClientes.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmUpdateCliente.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmUpdatePerfil.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmDeletePerfil.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarPerfil.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarTransacciones.resources

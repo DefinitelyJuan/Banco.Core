@@ -146,7 +146,7 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Truncar tabla
+                                        //TODO: Truncar tabla (done pero no testeado)
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -447,8 +447,8 @@ namespace CoreAplicacion
                 bool result = false;
                 try
                 {
-                    InsertBeneficiario beneficiariohandler = new InsertBeneficiario();
-                    result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
+                    InsertBeneficiario beneficiarionormal = new InsertBeneficiario();
+                    result = beneficiarionormal.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
                     if(!result) //No se inserto...
                     {
                         throw new Exception("La base de datos del core se encuentra fuera de servicio.");

@@ -34,7 +34,7 @@ namespace CoreAplicacion.CapaServicio
             try
             {
                 response = ExecuteCommand(ConnectionStrings, beneficiario);
-                ExecuteCommand(ConnectionStringsBackup, beneficiario);
+                //ExecuteCommand(ConnectionStringsBackup, beneficiario);
                 
             }
             catch (Exception err)

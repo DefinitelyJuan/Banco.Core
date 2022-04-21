@@ -35,5 +35,19 @@ namespace CoreBancario.Utilidades
                 }
             }
         }
+        public static void LimitComboBox(ComboBox combobox)
+        {
+            combobox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            combobox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        }
+        public static void WindowProperties(Form form)
+        {
+            form.ControlBox = false;
+            form.WindowState = FormWindowState.Maximized;
+            form.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+                    
     }
 }

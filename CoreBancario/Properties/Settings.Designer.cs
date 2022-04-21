@@ -33,5 +33,16 @@ namespace CoreBancario.Properties {
                 return ((string)(this["ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLOCALDB;Initial Catalog=NBCoreUsers;Integrated Securit" +
+            "y=True")]
+        public string NBCoreUsersConnectionString {
+            get {
+                return ((string)(this["NBCoreUsersConnectionString"]));
+            }
+        }
     }
 }
