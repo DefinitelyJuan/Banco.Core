@@ -449,7 +449,7 @@ namespace CoreAplicacion
                 {
                     InsertBeneficiario beneficiarionormal = new InsertBeneficiario();
                     result = beneficiarionormal.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
-                    if(!result) //No se inserto...
+                    if (!result) //No se inserto...
                     {
                         throw new Exception("La base de datos del core se encuentra fuera de servicio.");
                     }
