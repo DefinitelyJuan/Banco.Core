@@ -323,6 +323,8 @@ namespace CoreAplicacion.CapaServicio
             {
                 coreUp = false;
                 log.Error(err.Message);
+                DataSet noConn = null;
+                return noConn;
             }
 
             try

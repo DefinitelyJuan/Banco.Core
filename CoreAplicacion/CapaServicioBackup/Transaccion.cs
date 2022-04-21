@@ -34,7 +34,7 @@ namespace CoreAplicacion.CapaServicioBackup
             transaction = Connection.BeginTransaction();            
             int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
             dataSet = ActualizarNoCuenta(completado, NoCuenta, Monto, DbCr);
-            //TODO: InsertBackup tipo = 0  aqui con todo lo que se envio (osea, serializar objeto tipo transaccionmismapersona).(debajo)
+            //InsertBackup tipo = 0  aqui con todo lo que se envio (osea, serializar objeto tipo transaccionmismapersona)
             TransaccionMismaCuenta mismacuenta = new TransaccionMismaCuenta();
             mismacuenta.ID_TipoTransaccion = ID_TipoTransaccion;
             mismacuenta.DbCr = DbCr;
@@ -188,7 +188,7 @@ namespace CoreAplicacion.CapaServicioBackup
             }
             if(completado == 1 && dataset.Tables.Count == 3)
                 ActualizarNoCuentaNTP(completado,NoCuenta, ID_TipoEntidad, Entidad, Monto, 1);
-            //TODO: InsertBackup tipo = 1 aqui con todo lo que se envio (osea, serializar objeto tipo transaccion 3ero). abajo (EXPERIMENTAL)
+            //InsertBackup tipo = 1 aqui con todo lo que se envio (osea, serializar objeto tipo transaccion 3ero)
             TransaccionTercero tercero = new TransaccionTercero();
             tercero.NoCuenta = NoCuenta;
             tercero.Entidad = Entidad;

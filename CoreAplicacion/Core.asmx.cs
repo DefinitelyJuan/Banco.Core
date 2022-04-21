@@ -43,7 +43,7 @@ namespace CoreAplicacion
                     DataSet backup = backupInfo.backupdata();
                     if (backup.Tables.Count != 0)
                     {
-                        DataTable tableBackup = backup.Tables[0];                      
+                        DataTable tableBackup = backup.Tables[0];
                         TransaccionMismaCuenta transactMismaCuenta = new TransaccionMismaCuenta();
                         TransaccionTercero transact3ero = new TransaccionTercero();
                         BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
@@ -54,7 +54,6 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Insert de la bd (usar dataset si deja el profe)
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -80,6 +79,12 @@ namespace CoreAplicacion
                                         throw new Exception("Error");
                                     }
                             }
+                        }
+                        TruncateBackup backupsTrunc = new TruncateBackup();
+                        bool done = backupsTrunc.Truncate();
+                        if (done)
+                        {
+                            log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
                         }
                     }
                     //Bloque de carga del backup
@@ -141,7 +146,7 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Insert de la bd (usar dataset si deja el profe)
+                                        //TODO: Truncar tabla
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -168,7 +173,14 @@ namespace CoreAplicacion
                                     }
                             }
                         }
+                        TruncateBackup backupsTrunc = new TruncateBackup();
+                        bool done = backupsTrunc.Truncate();
+                        if (done)
+                        {
+                            log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
+                        }
                     }
+                    
                     //Bloque de carga del backup
 
                     return dataset;
@@ -228,7 +240,6 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Insert de la bd (usar dataset si deja el profe)
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -255,7 +266,13 @@ namespace CoreAplicacion
                                     }
                             }
                         }
-                    }
+                        TruncateBackup backupsTrunc = new TruncateBackup();
+                        bool done = backupsTrunc.Truncate();
+                        if (done)
+                        {
+                            log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
+                        }
+                    }                    
                     //Bloque de carga del backup
 
                     return dataset;
@@ -296,7 +313,10 @@ namespace CoreAplicacion
                     Transaccion transaccion = new Transaccion();
                     DataSet dataset = transaccion.TransaccionATercero(NoCuenta, Entidad, ID_TipoEntidad, ID_TipoTransaccion, DbCr, Comentario, Monto);
                     //Bloque de servicio
-
+                    if (dataset.Tables[0].Rows.Count == 0)
+                    {
+                        throw new Exception("La base de datos del core se encuentra fuera de servicio.");
+                    }
                     //Bloque de carga del backup
                     Controlador controlador = new Controlador();
                     getbackupjson backupInfo = new getbackupjson();
@@ -322,7 +342,6 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Insert de la bd (usar dataset si deja el profe)
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -380,10 +399,17 @@ namespace CoreAplicacion
                                     }
                             }
                         }
-                            //bucle de inserts
-                            //actualizar estados
-                            //truncar tabla CONFLICT (preguntar, pq si trunco entonces no tengo que actualizar estados)
+                        //bucle de inserts
+                        //actualizar estados
+                        //truncar tabla CONFLICT (preguntar, pq si trunco entonces no tengo que actualizar estados)
+                        TruncateBackup backupsTrunc = new TruncateBackup();
+                        bool done = backupsTrunc.Truncate();
+                        if (done)
+                        {
+                            log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
+                        }
                     }
+
                    //Bloque de carga del backup
                     
                     return dataset;
@@ -423,7 +449,10 @@ namespace CoreAplicacion
                 {
                     InsertBeneficiario beneficiariohandler = new InsertBeneficiario();
                     result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
-
+                    if(!result) //No se inserto...
+                    {
+                        throw new Exception("La base de datos del core se encuentra fuera de servicio.");
+                    }
                     //Bloque de carga del backup
                     Controlador controlador = new Controlador();
                     getbackupjson backupInfo = new getbackupjson();
@@ -442,7 +471,6 @@ namespace CoreAplicacion
                                 case "0": //transaccion misma cuenta
                                     {
                                         transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
-                                        //TODO: Insert de la bd (usar dataset si deja el profe)
                                         //el todo seria lo de abajo, es EXPERIMENTAL
                                         transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
                                         break;
@@ -468,6 +496,12 @@ namespace CoreAplicacion
                                         throw new Exception("Error");
                                     }
                             }
+                        }
+                        TruncateBackup backupsTrunc = new TruncateBackup();
+                        bool done = backupsTrunc.Truncate();
+                        if (done)
+                        {
+                            log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
                         }
                     }
                     //Bloque de carga del backup

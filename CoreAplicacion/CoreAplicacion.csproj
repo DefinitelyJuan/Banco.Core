@@ -108,6 +108,7 @@
     <Compile Include="CapaServicioBackup\InsertBeneficiario.cs" />
     <Compile Include="CapaServicioBackup\recargas.cs" />
     <Compile Include="CapaServicioBackup\Transaccion.cs" />
+    <Compile Include="CapaServicioBackup\TruncarBackups.cs" />
     <Compile Include="CapaServicio\Autenticacion.cs" />
     <Compile Include="CapaServicio\ClienteCRUD.cs" />
     <Compile Include="CapaServicio\hacerPagos.cs" />
