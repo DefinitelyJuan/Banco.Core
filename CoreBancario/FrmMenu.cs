@@ -105,5 +105,10 @@ namespace CoreBancario
             mostrarTransacciones.Show();
             mostrarTransacciones.BringToFront();
         }
+
+        private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

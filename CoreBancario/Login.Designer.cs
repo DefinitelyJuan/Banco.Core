@@ -110,6 +110,8 @@ namespace CoreBancario
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtUser);
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Login";
             this.Text = "Form1";
             this.ResumeLayout(false);

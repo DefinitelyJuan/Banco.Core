@@ -26,20 +26,28 @@ namespace CoreBancario
             UsuariosTableAdapter usuario = new UsuariosTableAdapter();
             try
             {
-                usuario.Connection.Open();
-                int response = usuario.Delete(txtPass.Text, txtUser.Text); //TODO: Confirmation window (ver caja)
-                if (response > 0)
+                var confirmResult = MessageBox.Show($"Desea eliminar al usuario {txtUser.Text} de la base de datos?", "Confirmar Delete",MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
                 {
-                    MessageBox.Show("Perfil eliminado");
-                    log.Info($"Perfil eliminado: {txtUser}");
-                    Helpers.ClearFormControls(this);
+                    usuario.Connection.Open();
+                    int response = usuario.Delete(txtPass.Text, txtUser.Text); //TODO: Confirmation window (ver caja)
+                    if (response > 0)
+                    {
+                        MessageBox.Show("Perfil eliminado");
+                        log.Info($"Perfil eliminado: {txtUser}");
+                        Helpers.ClearFormControls(this);
 
 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Perfil No Encontrado o contraseña incorrecta");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Perfil No Encontrado o contraseña incorrecta");
-                }
+                    // If 'No', do something here.
+                }                
             }
             catch (Exception err)
             {

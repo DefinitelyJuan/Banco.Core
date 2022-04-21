@@ -111,6 +111,12 @@
     <Compile Include="CRUDPerfiles\frmDeletePerfil.Designer.cs">
       <DependentUpon>frmDeletePerfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDeleteCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDeleteCliente.Designer.cs">
+      <DependentUpon>frmDeleteCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CRUDPerfiles\frmDeletePerfil.resx">
       <DependentUpon>frmDeletePerfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDeleteCliente.resx">
+      <DependentUpon>frmDeleteCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>

@@ -66,7 +66,6 @@ namespace CoreBancario
             this.provinciaTableAdapter.Fill(this.datasetNB.Provincia);
             // TODO: esta línea de código carga datos en la tabla 'datasetNB.Beneficiario' Puede moverla o quitarla según sea necesario.
             this.beneficiarioTableAdapter.Fill(this.datasetNB.Beneficiario);
-
             Helpers.LimitComboBox(comboMunicipio);
             Helpers.LimitComboBox(comboProvincia);
             Helpers.LimitComboBox(comboSector);
