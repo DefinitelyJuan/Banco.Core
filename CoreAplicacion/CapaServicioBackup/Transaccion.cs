@@ -31,7 +31,7 @@ namespace CoreAplicacion.CapaServicioBackup
             }
             Connection.ConnectionString = ConnectionStrings;
             Connection.Open();
-            transaction = Connection.BeginTransaction();
+            transaction = Connection.BeginTransaction();            
             int completado = InsertarTransaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
             dataSet = ActualizarNoCuenta(completado, NoCuenta, Monto, DbCr);
             //TODO: InsertBackup tipo = 0  aqui con todo lo que se envio (osea, serializar objeto tipo transaccionmismapersona).(debajo)
@@ -40,8 +40,11 @@ namespace CoreAplicacion.CapaServicioBackup
             mismacuenta.DbCr = DbCr;
             mismacuenta.comentario = Comentario;
             mismacuenta.NoCuenta = NoCuenta;
-            mismacuenta.Monto = Monto;
-            InsertTransaccionMismaCuentaEnBackups(ConnectionStrings, mismacuenta);
+            mismacuenta.Monto = Monto; //añadir if abajo con el connstring (Done)
+            if(ConnectionStrings == controlador.ObtenerConexionBackup())
+            {
+                int insertado = InsertTransaccionMismaCuentaEnBackups(ConnectionStrings, mismacuenta);
+            }
             transaction.Commit();
             Connection.Close();
             return dataSet;
@@ -194,7 +197,10 @@ namespace CoreAplicacion.CapaServicioBackup
             tercero.DbCr = DbCr;
             tercero.Comentario = Comentario;
             tercero.Monto = Monto;
-            InsertTransaccion3eroEnBackups(ConnectionStrings, tercero);
+            if (ConnectionStrings == controlador.ObtenerConexionBackup())
+            {
+                InsertTransaccion3eroEnBackups(ConnectionStrings, tercero);
+            }
             transaction.Commit();
             Connection.Close();
             return dataset;
@@ -256,41 +262,31 @@ namespace CoreAplicacion.CapaServicioBackup
         }
         public int InsertTransaccionMismaCuentaEnBackups(string cn, TransaccionMismaCuenta mismacuenta)
         {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
             int response = 0;
             try
             {
-                Connection.Open();
                 sqlCommand = new SqlCommand();
-                sqlCommand.Connection = Connection;
-                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.CommandText = "ppInsertBackup";
                 sqlCommand.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(mismacuenta));
                 sqlCommand.Parameters.AddWithValue("@estado", "Pendiente");
                 sqlCommand.Parameters.AddWithValue("@tipo", 0);
-                response = sqlCommand.ExecuteNonQuery();
-                return response;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Connection = Connection;
+                sqlCommand.Transaction = transaction;
+                response = sqlCommand.ExecuteNonQuery();               
             }
             catch (Exception err)
             {
                 log.Error(err.Message);
-                return response;
+                transaction.Rollback();
             }
-            finally
-            {
-                Connection.Close();
-
-            }
+            return response;
         }
         public int InsertTransaccion3eroEnBackups(string cn, TransaccionTercero tercero)
         {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
             int response = 0;
             try
             {
-                Connection.Open();
                 sqlCommand = new SqlCommand();
                 sqlCommand.Connection = Connection;
                 sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -298,19 +294,15 @@ namespace CoreAplicacion.CapaServicioBackup
                 sqlCommand.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(tercero));
                 sqlCommand.Parameters.AddWithValue("@estado", "Pendiente");
                 sqlCommand.Parameters.AddWithValue("@tipo", 1);
+                sqlCommand.Transaction = transaction;
                 response = sqlCommand.ExecuteNonQuery();
-                return response;
             }
             catch (Exception err)
             {
                 log.Error(err.Message);
-                return response;
+                transaction.Rollback();
             }
-            finally
-            {
-                Connection.Close();
-
-            }
+            return response;
         }
     }
 }

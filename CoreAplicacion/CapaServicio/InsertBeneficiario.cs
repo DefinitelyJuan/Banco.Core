@@ -15,7 +15,9 @@ namespace CoreAplicacion.CapaServicio
         SqlCommand cmd = null;
         public string ConnectionStrings;
         public string ConnectionStringsBackup;
-        public bool Insert(int ID_Beneficiario, int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente)
+        //TODO: Usar transaction pq son dos tablas
+
+        public bool Insert(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente)
         {
             //Connection = new SqlConnection();
             Controlador controlador = new Controlador();
@@ -25,7 +27,6 @@ namespace CoreAplicacion.CapaServicio
             ConnectionStringsBackup = controlador.ObtenerConexionBackup(); //Obtengo conexion del backup
             BeneficiarioInsert beneficiario = new BeneficiarioInsert();
             beneficiario.NoCuenta = NoCuenta;
-            beneficiario.id_beneficiario = ID_Beneficiario;
             beneficiario.ID_TipoBeneficiario = ID_TipoBeneficiario;
             beneficiario.nombre = Nombre;
             beneficiario.ID_Cliente = ID_Cliente;
@@ -57,8 +58,7 @@ namespace CoreAplicacion.CapaServicio
                 cmd = new SqlCommand();
                 cmd.Connection = Connection;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ppInsertBeneficiario";
-                cmd.Parameters.AddWithValue("@ID_Beneficiario", beneficiario.id_beneficiario);
+                cmd.CommandText = "ppInsertBeneficiario";                
                 cmd.Parameters.AddWithValue("@NoCuenta", beneficiario.NoCuenta);
                 cmd.Parameters.AddWithValue("@ID_TipoBeneficiario", beneficiario.ID_TipoBeneficiario);
                 cmd.Parameters.AddWithValue("@Nombre", beneficiario.nombre);

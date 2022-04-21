@@ -15,18 +15,16 @@ namespace CoreAplicacion.CapaServicioBackup
         SqlConnection Connection = null;
         SqlCommand cmd = null;
         public string ConnectionStrings;
-        public bool Insert(int ID_Beneficiario, int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente,bool backingup)
+        public bool Insert(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente,bool backingup)
         {
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
             int response = 0;
             BeneficiarioInsert beneficiario = new BeneficiarioInsert();
             beneficiario.NoCuenta = NoCuenta;
-            beneficiario.id_beneficiario = ID_Beneficiario;
             beneficiario.ID_TipoBeneficiario = ID_TipoBeneficiario;
             beneficiario.nombre = Nombre;
             beneficiario.ID_Cliente = ID_Cliente;
-
             if (backingup)
             {
                 ConnectionStrings = controlador.ObtenerConexion(); //Obtengo conexion del core
@@ -70,7 +68,6 @@ namespace CoreAplicacion.CapaServicioBackup
                 cmd.Connection = Connection;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "ppInsertBeneficiario";
-                cmd.Parameters.AddWithValue("@ID_Beneficiario", beneficiario.id_beneficiario);
                 cmd.Parameters.AddWithValue("@NoCuenta", beneficiario.NoCuenta);
                 cmd.Parameters.AddWithValue("@ID_TipoBeneficiario", beneficiario.ID_TipoBeneficiario);
                 cmd.Parameters.AddWithValue("@Nombre", beneficiario.nombre);

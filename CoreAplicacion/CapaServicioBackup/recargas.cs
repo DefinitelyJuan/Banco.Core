@@ -17,7 +17,7 @@ namespace CoreAplicacion.CapaServicioBackup
             DataSet dataSet = new DataSet();
             Connection = new SqlConnection();
             Controlador controlador = new Controlador();
-            ConnectionStrings = controlador.ObtenerConexion();
+            ConnectionStrings = controlador.ObtenerConexionBackup();
             Connection.ConnectionString = ConnectionStrings;
             Connection.Open();
             sqlCommand = new SqlCommand();

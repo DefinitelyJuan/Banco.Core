@@ -9,6 +9,7 @@ using CoreAplicacion.Clases;
 using CoreAplicacion.CapaServicioBackup;
 using System.Text.Json;
 using CoreAplicacion.JsonClases;
+using System.Data.SqlClient;
 
 namespace CoreAplicacion
 {
@@ -34,7 +35,8 @@ namespace CoreAplicacion
                     Autenticacion autenticacion = new Autenticacion();
                     DataSet auth = autenticacion.Autenticarse(usuario, contraseña, pin);
 
-                    //Bloque de carga del backup
+                    //Bloque de carga del backup 
+                    //TODO: maybe convertir a funcion
                     Controlador controlador = new Controlador();
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
@@ -68,7 +70,7 @@ namespace CoreAplicacion
                                     {
                                         beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                         InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                        backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
 
 
                                         break;
@@ -117,7 +119,10 @@ namespace CoreAplicacion
                     Transaccion transaccion = new Transaccion();
                     DataSet dataset;
                     dataset = transaccion.transaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto);
-
+                    if(dataset.Tables[0].Rows.Count == 0)
+                    {
+                        throw new Exception("La base de datos del core se encuentra fuera de servicio.");
+                    }
                     //Bloque de carga del backup
                     Controlador controlador = new Controlador();
                     getbackupjson backupInfo = new getbackupjson();
@@ -152,7 +157,7 @@ namespace CoreAplicacion
                                     {
                                         beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                         InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                        backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
 
 
                                         break;
@@ -201,7 +206,10 @@ namespace CoreAplicacion
                 {
                     recargas recargas = new recargas();
                     DataSet dataset = recargas.TodasCuentasDiferentes(ID_Cliente);
-
+                    if (dataset.Tables[0].Rows.Count == 0)
+                    {
+                        throw new Exception("La base de datos del core se encuentra fuera de servicio.");
+                    }
                     //Bloque de carga del backup
                     Controlador controlador = new Controlador();
                     getbackupjson backupInfo = new getbackupjson();
@@ -236,7 +244,7 @@ namespace CoreAplicacion
                                     {
                                         beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                         InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                        backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
 
 
                                         break;
@@ -263,7 +271,7 @@ namespace CoreAplicacion
                     }
                     catch (Exception error)
                     {
-                        log.Error(error);
+                        log.Error(error.Message);
                         return empty;
                     }
                 }
@@ -330,7 +338,7 @@ namespace CoreAplicacion
                                     {
                                         beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                         InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                        backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
 
 
                                         break;
@@ -406,7 +414,7 @@ namespace CoreAplicacion
         }
 
         [WebMethod]
-        public bool InsertarBeneficiario(int ID_Beneficiario, int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente, string clave)
+        public bool InsertarBeneficiario(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente, string clave)
         {
             if (clave == "Droog ethereal develop 269138")
             {
@@ -414,7 +422,7 @@ namespace CoreAplicacion
                 try
                 {
                     InsertBeneficiario beneficiariohandler = new InsertBeneficiario();
-                    result = beneficiariohandler.Insert(ID_Beneficiario, NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
+                    result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
 
                     //Bloque de carga del backup
                     Controlador controlador = new Controlador();
@@ -450,7 +458,7 @@ namespace CoreAplicacion
                                     {
                                         beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                         InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                        backupbeneficiario.Insert(beneficiarioInsert.id_beneficiario, beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                        backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
 
 
                                         break;
@@ -468,7 +476,7 @@ namespace CoreAplicacion
                 {
                     log.Error(err.Message);
                     InsertBeneficiarioBackup beneficiariohandler = new InsertBeneficiarioBackup();
-                    result = beneficiariohandler.Insert(ID_Beneficiario, NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente, false);
+                    result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente, false);
                 }
                 
                 return result;

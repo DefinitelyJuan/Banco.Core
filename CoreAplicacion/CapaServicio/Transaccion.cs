@@ -47,6 +47,7 @@ namespace CoreAplicacion.CapaServicio
             {
                 coreUp = false;
                 log.Error(err.Message);
+                return dataSet; //Se retornará null
             }
             finally
             {

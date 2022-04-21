@@ -137,3 +137,4 @@ C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.Text.Encoding
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.Text.Json.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.ValueTuple.xml
+C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.config
