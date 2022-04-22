@@ -35,7 +35,8 @@ namespace CoreAplicacion.CapaServicioBackup
             }
             catch (Exception err)
             {
-                log.Info(err.Message);
+                log.Error(err.Message);
+                return done;
             }
             finally
             {

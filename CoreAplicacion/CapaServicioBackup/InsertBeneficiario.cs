@@ -38,7 +38,7 @@ namespace CoreAplicacion.CapaServicioBackup
             try
             {
                 Connection.Open();
-                ExecuteCommand(ConnectionStrings,beneficiario);
+                response = ExecuteCommand(ConnectionStrings,beneficiario);
                 log.Info($"Insertado Beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}");
                 if(ConnectionStrings == controlador.ObtenerConexionBackup())
                 {

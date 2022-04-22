@@ -42,8 +42,9 @@ namespace CoreAplicacion
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
                     DataSet backup = backupInfo.backupdata();
-                    if (backup.Tables.Count != 0)
+                    if (backup.Tables[0].Rows.Count > 0)
                     {
+                        log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
                     //Bloque de carga del backup
@@ -54,14 +55,14 @@ namespace CoreAplicacion
                 {
                     try
                     {
-                        log.Error(err.Message);
+                        log.Error($"Error en Autenticacion: {err.Message}");
                         AutenticacionBackup backupAuth = new AutenticacionBackup();
                         DataSet authbackup = backupAuth.Autenticarse(usuario, contraseña, pin);
                         return authbackup;
                     }
                     catch (Exception error)
                     {
-                        log.Error(error.Message);
+                        log.Error($"Error en Autenticacion version backup: {error.Message}");
                         return empty;                        
                     }                    
                 }
@@ -92,8 +93,9 @@ namespace CoreAplicacion
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
                     DataSet backup = backupInfo.backupdata();
-                    if (backup.Tables.Count != 0)
+                    if (backup.Tables[0].Rows.Count > 0)
                     {
+                        log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
 
@@ -103,7 +105,7 @@ namespace CoreAplicacion
                 }
                 catch(Exception err)
                 {
-                    log.Error(err.Message);
+                    log.Error($"Error en Insertar Transaccion: {err.Message}");
                     try
                     {
                         TransaccionBackup transaccionbackup = new TransaccionBackup();
@@ -113,7 +115,7 @@ namespace CoreAplicacion
                     }
                     catch(Exception error)
                     {
-                        log.Error(error);
+                        log.Error($"Error en Insertar transaccion version backup: {error.Message}");
                         return empty;
                     }
                 }
@@ -143,8 +145,9 @@ namespace CoreAplicacion
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
                     DataSet backup = backupInfo.backupdata();
-                    if (backup.Tables.Count != 0)
+                    if (backup.Tables[0].Rows.Count > 0)
                     {
+                        log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
                     //Bloque de carga del backup
@@ -153,7 +156,7 @@ namespace CoreAplicacion
                 }
                 catch (Exception err)
                 {
-                    log.Error(err.Message);
+                    log.Error($"Error en Obtener cuentas diferentes: {err.Message}");
                     try
                     {
                         recargasBackup recargasbackup = new recargasBackup();
@@ -162,7 +165,7 @@ namespace CoreAplicacion
                     }
                     catch (Exception error)
                     {
-                        log.Error(error.Message);
+                        log.Error($"Error en ObtenerCuentasDiferentes version backup: {error.Message}");
                         return empty;
                     }
                 }
@@ -196,8 +199,9 @@ namespace CoreAplicacion
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
                     DataSet backup = backupInfo.backupdata();
-                    if (backup.Tables.Count != 0)
+                    if ((backup.Tables[0].Rows.Count > 0))
                     {
+                        log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
 
@@ -208,7 +212,7 @@ namespace CoreAplicacion
                 }
                 catch (Exception err)
                 {
-                    log.Error(err.Message);
+                    log.Error($"Error en Insertar Transaccion a terceros: {err.Message}");
                     try
                     {
                         TransaccionBackup transaccionbackup = new TransaccionBackup();
@@ -217,7 +221,7 @@ namespace CoreAplicacion
                     }
                     catch (Exception error)
                     {
-                        log.Error(error);
+                        log.Error($"Error en Insertar a terceros (coreDown): {error.Message}");
                         return empty;
                     }
                 }                
@@ -250,15 +254,16 @@ namespace CoreAplicacion
                     getbackupjson backupInfo = new getbackupjson();
                     TransaccionBackup transaccionBackup = new TransaccionBackup();
                     DataSet backup = backupInfo.backupdata();
-                    if (backup.Tables.Count != 0)
+                    if (backup.Tables[0].Rows.Count > 0)
                     {
+                        log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
                     //Bloque de carga del backup
                 }
                 catch (Exception err)
                 {
-                    log.Error(err.Message);
+                    log.Error($"Error en Insertar Beneficiario: {err.Message}");
                     InsertBeneficiarioBackup beneficiariohandler = new InsertBeneficiarioBackup();
                     result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente, false);
                 }
@@ -286,7 +291,7 @@ namespace CoreAplicacion
                         continue;
 
                     data = false;
-                    datatest = null;
+                    datatest = new DataSet();
                     switch (row[3].ToString())
                     {
                         case "0": //transaccion misma cuenta
@@ -332,8 +337,9 @@ namespace CoreAplicacion
                             }
                     }
                 }
-                if (datatest.Tables.Count > 0 || data == true)
+                if ((datatest.Tables.Count > 0) || (data == true))
                 {
+                    log.Info("Iniciando Truncado...");
                     TruncateBackup backupsTrunc = new TruncateBackup();
                     bool done = backupsTrunc.Truncate();
                     if (done)
@@ -345,7 +351,7 @@ namespace CoreAplicacion
             }
             catch (Exception err)
             {
-                log.Error(err.Message);
+                log.Error($"Error en RestauracionDeDatos: {err.Message}");
             }
         }
     }
