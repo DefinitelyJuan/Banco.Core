@@ -116,7 +116,6 @@ C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\roslyn\VBCSCompiler.
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.CopyComplete
-C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.AssemblyReference.cache
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.dll
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\Microsoft.Bcl.AsyncInterfaces.dll
@@ -138,3 +137,4 @@ C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.Text.Json.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\System.ValueTuple.xml
 C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\bin\log4net.config
+C:\Users\moroc\source\repos\CoreBancario\CoreAplicacion\obj\Debug\CoreAplicacion.csproj.AssemblyReference.cache

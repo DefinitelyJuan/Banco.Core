@@ -212,7 +212,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
               <Mapping SourceColumn="IngresosMensuales" DataSetColumn="IngresosMensuales" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.Cliente" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="getClienteByCedula" Modifier="Public" Name="getClienteByCedula" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="getClienteByCedula">
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.Cliente" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="getClienteByCedula" Modifier="Public" Name="getClienteByCedula" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="getClienteByCedula">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ID_Cliente FROM Cliente where Cedula_Cliente = @cedula</CommandText>
@@ -222,7 +222,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="idnextcliente" Modifier="Public" Name="idnextcliente" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="idnextcliente">
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="idnextcliente" Modifier="Public" Name="idnextcliente" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="idnextcliente">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ident_current('Cliente')+1</CommandText>
@@ -230,7 +230,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.ppInsertCliente" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="ppInsertCliente" Modifier="Public" Name="ppInsertCliente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="ppInsertCliente">
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.ppInsertCliente" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="ppInsertCliente" Modifier="Public" Name="ppInsertCliente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="ppInsertCliente">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.ppInsertCliente</CommandText>
@@ -249,7 +249,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.ppInsertUsuario" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="ppInsertUsuario" Modifier="Public" Name="ppInsertUsuario" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="ppInsertUsuario">
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.ppInsertUsuario" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="ppInsertUsuario" Modifier="Public" Name="ppInsertUsuario" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="ppInsertUsuario">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.ppInsertUsuario</CommandText>
@@ -396,15 +396,13 @@ WHERE        (Nombre_Municipio= @nombremunicipio)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[NoCuenta] ([Monto], [ID_Cliente], [ID_TipoCuenta], [FechaCreacion], [FechaUltimaActualizacion]) VALUES (@Monto, @ID_Cliente, @ID_TipoCuenta, @FechaCreacion, @FechaUltimaActualizacion);
-SELECT NoCuenta, Monto, ID_Cliente, ID_TipoCuenta, FechaCreacion, FechaUltimaActualizacion FROM NoCuenta WHERE (NoCuenta = SCOPE_IDENTITY())</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO NoCuenta
+                         (Monto, ID_Cliente, ID_TipoCuenta)
+VALUES        (0,@IDCliente,@IDTipoCuenta)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Monto" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Monto" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ID_Cliente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_Cliente" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ID_TipoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@FechaCreacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaCreacion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@FechaUltimaActualizacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaUltimaActualizacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="IDCliente" ColumnName="ID_Cliente" DataSourceName="NationalBank.dbo.NoCuenta" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@IDCliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_Cliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="IDTipoCuenta" ColumnName="ID_TipoCuenta" DataSourceName="NationalBank.dbo.NoCuenta" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@IDTipoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
@@ -415,22 +413,14 @@ SELECT NoCuenta, Monto, ID_Cliente, ID_TipoCuenta, FechaCreacion, FechaUltimaAct
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[NoCuenta] SET [Monto] = @Monto, [ID_Cliente] = @ID_Cliente, [ID_TipoCuenta] = @ID_TipoCuenta, [FechaCreacion] = @FechaCreacion, [FechaUltimaActualizacion] = @FechaUltimaActualizacion WHERE (([NoCuenta] = @Original_NoCuenta) AND ([Monto] = @Original_Monto) AND ([ID_Cliente] = @Original_ID_Cliente) AND ([ID_TipoCuenta] = @Original_ID_TipoCuenta) AND ([FechaCreacion] = @Original_FechaCreacion) AND ([FechaUltimaActualizacion] = @Original_FechaUltimaActualizacion));
-SELECT NoCuenta, Monto, ID_Cliente, ID_TipoCuenta, FechaCreacion, FechaUltimaActualizacion FROM NoCuenta WHERE (NoCuenta = @NoCuenta)</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       NoCuenta
+SET                ID_Cliente = @ID_Cliente, ID_TipoCuenta = @ID_TipoCuenta
+WHERE        (NoCuenta = @NoCuenta)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Monto" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Monto" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ID_Cliente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_Cliente" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ID_TipoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@FechaCreacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaCreacion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@FechaUltimaActualizacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaUltimaActualizacion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_NoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="NoCuenta" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_Monto" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Monto" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_Cliente" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_Cliente" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_FechaCreacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaCreacion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_FechaUltimaActualizacion" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="FechaUltimaActualizacion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="NoCuenta" ColumnName="NoCuenta" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="NoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ID_Cliente" ColumnName="ID_Cliente" DataSourceName="NationalBank.dbo.NoCuenta" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ID_Cliente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_Cliente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ID_TipoCuenta" ColumnName="ID_TipoCuenta" DataSourceName="NationalBank.dbo.NoCuenta" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ID_TipoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="NoCuenta" ColumnName="NoCuenta" DataSourceName="NationalBank.dbo.NoCuenta" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NoCuenta" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="NoCuenta" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -872,7 +862,18 @@ SELECT ID_TipoCuenta, Nombre_TipoCuenta FROM TipoCuenta WHERE (ID_TipoCuenta = @
               <Mapping SourceColumn="ID_TipoCuenta" DataSetColumn="ID_TipoCuenta" />
               <Mapping SourceColumn="Nombre_TipoCuenta" DataSetColumn="Nombre_TipoCuenta" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.TipoCuenta" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="getIDTipoCuentaByName" Modifier="Public" Name="getIDTipoCuentaByName" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="getIDTipoCuentaByName">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ID_TipoCuenta FROM TipoCuenta where Nombre_TipoCuenta = @TipoCuenta</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="TipoCuenta" ColumnName="Nombre_TipoCuenta" DataSourceName="NationalBank.dbo.TipoCuenta" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@TipoCuenta" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="Nombre_TipoCuenta" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TipoEntidadTableAdapter" GeneratorDataComponentClassName="TipoEntidadTableAdapter" Name="TipoEntidad" UserDataComponentName="TipoEntidadTableAdapter">
             <MainSource>
@@ -921,58 +922,6 @@ SELECT ID_TipoEntidad, Nombre_TipoEntidad FROM TipoEntidad WHERE (ID_TipoEntidad
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TipoPrestamoTableAdapter" GeneratorDataComponentClassName="TipoPrestamoTableAdapter" Name="TipoPrestamo" UserDataComponentName="TipoPrestamoTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.TipoPrestamo" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [dbo].[TipoPrestamo] WHERE (([ID_TipoPrestamo] = @Original_ID_TipoPrestamo) AND ([Tasa] = @Original_Tasa) AND ([Duracion] = @Original_Duracion))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_Tasa" Precision="2" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Tasa" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Duracion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Duracion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </DeleteCommand>
-                <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [dbo].[TipoPrestamo] ([Tasa], [Duracion]) VALUES (@Tasa, @Duracion);
-SELECT ID_TipoPrestamo, Tasa, Duracion FROM TipoPrestamo WHERE (ID_TipoPrestamo = SCOPE_IDENTITY())</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Tasa" Precision="2" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Tasa" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Duracion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Duracion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </InsertCommand>
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT ID_TipoPrestamo, Tasa, Duracion FROM dbo.TipoPrestamo</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[TipoPrestamo] SET [Tasa] = @Tasa, [Duracion] = @Duracion WHERE (([ID_TipoPrestamo] = @Original_ID_TipoPrestamo) AND ([Tasa] = @Original_Tasa) AND ([Duracion] = @Original_Duracion));
-SELECT ID_TipoPrestamo, Tasa, Duracion FROM TipoPrestamo WHERE (ID_TipoPrestamo = @ID_TipoPrestamo)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Tasa" Precision="2" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Tasa" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Duracion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Duracion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_Tasa" Precision="2" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="Tasa" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Duracion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Duracion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="ID_TipoPrestamo" ColumnName="ID_TipoPrestamo" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="ID_TipoPrestamo" DataSetColumn="ID_TipoPrestamo" />
-              <Mapping SourceColumn="Tasa" DataSetColumn="Tasa" />
-              <Mapping SourceColumn="Duracion" DataSetColumn="Duracion" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TipoTransaccionesTableAdapter" GeneratorDataComponentClassName="TipoTransaccionesTableAdapter" Name="TipoTransacciones" UserDataComponentName="TipoTransaccionesTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.TipoTransacciones" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -1005,18 +954,14 @@ SELECT ID_TipoTransaccion, CodigoTransaccion, Descripcion, Status FROM TipoTrans
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [dbo].[TipoTransacciones] SET [CodigoTransaccion] = @CodigoTransaccion, [Descripcion] = @Descripcion, [Status] = @Status WHERE (([ID_TipoTransaccion] = @Original_ID_TipoTransaccion) AND ([CodigoTransaccion] = @Original_CodigoTransaccion) AND ([Descripcion] = @Original_Descripcion) AND ([Status] = @Original_Status));
-SELECT ID_TipoTransaccion, CodigoTransaccion, Descripcion, Status FROM TipoTransacciones WHERE (ID_TipoTransaccion = @ID_TipoTransaccion)</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       TipoTransacciones
+SET                Descripcion = @desc, Status = @status
+WHERE        (CodigoTransaccion = @codigo)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CodigoTransaccion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CodigoTransaccion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoTransaccion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoTransaccion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_CodigoTransaccion" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CodigoTransaccion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Status" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="ID_TipoTransaccion" ColumnName="ID_TipoTransaccion" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ID_TipoTransaccion" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_TipoTransaccion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="desc" ColumnName="Descripcion" DataSourceName="NationalBank.dbo.TipoTransacciones" DataTypeServer="varchar(50)" DbType="AnsiString" Direction="Input" ParameterName="@desc" Precision="0" ProviderType="VarChar" Scale="0" Size="50" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="status" ColumnName="Status" DataSourceName="NationalBank.dbo.TipoTransacciones" DataTypeServer="varchar(1)" DbType="AnsiString" Direction="Input" ParameterName="@status" Precision="0" ProviderType="VarChar" Scale="0" Size="1" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="codigo" ColumnName="CodigoTransaccion" DataSourceName="NationalBank.dbo.TipoTransacciones" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CodigoTransaccion" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -1106,6 +1051,53 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TipoPrestamoTableAdapter" GeneratorDataComponentClassName="TipoPrestamoTableAdapter" Name="TipoPrestamo" UserDataComponentName="TipoPrestamoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="NationalBank.dbo.TipoPrestamo" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[TipoPrestamo] WHERE (([ID_TipoPrestamo] = @Original_ID_TipoPrestamo) AND ([Descripcion] = @Original_Descripcion))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[TipoPrestamo] ([Descripcion]) VALUES (@Descripcion);
+SELECT ID_TipoPrestamo, Descripcion FROM TipoPrestamo WHERE (ID_TipoPrestamo = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID_TipoPrestamo, Descripcion FROM dbo.TipoPrestamo</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[TipoPrestamo] SET [Descripcion] = @Descripcion WHERE (([ID_TipoPrestamo] = @Original_ID_TipoPrestamo) AND ([Descripcion] = @Original_Descripcion));
+SELECT ID_TipoPrestamo, Descripcion FROM TipoPrestamo WHERE (ID_TipoPrestamo = @ID_TipoPrestamo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_Descripcion" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ID_TipoPrestamo" ColumnName="ID_TipoPrestamo" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ID_TipoPrestamo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ID_TipoPrestamo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID_TipoPrestamo" DataSetColumn="ID_TipoPrestamo" />
+              <Mapping SourceColumn="Descripcion" DataSetColumn="Descripcion" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1114,7 +1106,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
   <xs:element name="datasetNB" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="datasetNB" msprop:Generator_UserDSName="datasetNB">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Beneficiario" msprop:Generator_TableClassName="BeneficiarioDataTable" msprop:Generator_TableVarName="tableBeneficiario" msprop:Generator_TablePropName="Beneficiario" msprop:Generator_RowDeletingName="BeneficiarioRowDeleting" msprop:Generator_RowChangingName="BeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="BeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="BeneficiarioRowDeleted" msprop:Generator_UserTableName="Beneficiario" msprop:Generator_RowChangedName="BeneficiarioRowChanged" msprop:Generator_RowEvArgName="BeneficiarioRowChangeEvent" msprop:Generator_RowClassName="BeneficiarioRow">
+        <xs:element name="Beneficiario" msprop:Generator_TableClassName="BeneficiarioDataTable" msprop:Generator_TableVarName="tableBeneficiario" msprop:Generator_RowChangedName="BeneficiarioRowChanged" msprop:Generator_TablePropName="Beneficiario" msprop:Generator_RowDeletingName="BeneficiarioRowDeleting" msprop:Generator_RowChangingName="BeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="BeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="BeneficiarioRowDeleted" msprop:Generator_RowClassName="BeneficiarioRow" msprop:Generator_UserTableName="Beneficiario" msprop:Generator_RowEvArgName="BeneficiarioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Beneficiario" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Beneficiario" msprop:Generator_ColumnPropNameInRow="ID_Beneficiario" msprop:Generator_ColumnPropNameInTable="ID_BeneficiarioColumn" msprop:Generator_UserColumnName="ID_Beneficiario" type="xs:int" />
@@ -1131,7 +1123,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Usuario" msprop:Generator_TableClassName="UsuarioDataTable" msprop:Generator_TableVarName="tableUsuario" msprop:Generator_TablePropName="Usuario" msprop:Generator_RowDeletingName="UsuarioRowDeleting" msprop:Generator_RowChangingName="UsuarioRowChanging" msprop:Generator_RowEvHandlerName="UsuarioRowChangeEventHandler" msprop:Generator_RowDeletedName="UsuarioRowDeleted" msprop:Generator_UserTableName="Usuario" msprop:Generator_RowChangedName="UsuarioRowChanged" msprop:Generator_RowEvArgName="UsuarioRowChangeEvent" msprop:Generator_RowClassName="UsuarioRow">
+        <xs:element name="Usuario" msprop:Generator_TableClassName="UsuarioDataTable" msprop:Generator_TableVarName="tableUsuario" msprop:Generator_RowChangedName="UsuarioRowChanged" msprop:Generator_TablePropName="Usuario" msprop:Generator_RowDeletingName="UsuarioRowDeleting" msprop:Generator_RowChangingName="UsuarioRowChanging" msprop:Generator_RowEvHandlerName="UsuarioRowChangeEventHandler" msprop:Generator_RowDeletedName="UsuarioRowDeleted" msprop:Generator_RowClassName="UsuarioRow" msprop:Generator_UserTableName="Usuario" msprop:Generator_RowEvArgName="UsuarioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Cliente" msprop:Generator_ColumnVarNameInTable="columnID_Cliente" msprop:Generator_ColumnPropNameInRow="ID_Cliente" msprop:Generator_ColumnPropNameInTable="ID_ClienteColumn" msprop:Generator_UserColumnName="ID_Cliente" type="xs:int" />
@@ -1166,7 +1158,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Cliente" msprop:Generator_TableClassName="ClienteDataTable" msprop:Generator_TableVarName="tableCliente" msprop:Generator_TablePropName="Cliente" msprop:Generator_RowDeletingName="ClienteRowDeleting" msprop:Generator_RowChangingName="ClienteRowChanging" msprop:Generator_RowEvHandlerName="ClienteRowChangeEventHandler" msprop:Generator_RowDeletedName="ClienteRowDeleted" msprop:Generator_UserTableName="Cliente" msprop:Generator_RowChangedName="ClienteRowChanged" msprop:Generator_RowEvArgName="ClienteRowChangeEvent" msprop:Generator_RowClassName="ClienteRow">
+        <xs:element name="Cliente" msprop:Generator_TableClassName="ClienteDataTable" msprop:Generator_TableVarName="tableCliente" msprop:Generator_RowChangedName="ClienteRowChanged" msprop:Generator_TablePropName="Cliente" msprop:Generator_RowDeletingName="ClienteRowDeleting" msprop:Generator_RowChangingName="ClienteRowChanging" msprop:Generator_RowEvHandlerName="ClienteRowChangeEventHandler" msprop:Generator_RowDeletedName="ClienteRowDeleted" msprop:Generator_RowClassName="ClienteRow" msprop:Generator_UserTableName="Cliente" msprop:Generator_RowEvArgName="ClienteRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Cliente" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Cliente" msprop:Generator_ColumnPropNameInRow="ID_Cliente" msprop:Generator_ColumnPropNameInTable="ID_ClienteColumn" msprop:Generator_UserColumnName="ID_Cliente" type="xs:int" />
@@ -1206,7 +1198,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ClienteBeneficiario" msprop:Generator_TableClassName="ClienteBeneficiarioDataTable" msprop:Generator_TableVarName="tableClienteBeneficiario" msprop:Generator_TablePropName="ClienteBeneficiario" msprop:Generator_RowDeletingName="ClienteBeneficiarioRowDeleting" msprop:Generator_RowChangingName="ClienteBeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="ClienteBeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="ClienteBeneficiarioRowDeleted" msprop:Generator_UserTableName="ClienteBeneficiario" msprop:Generator_RowChangedName="ClienteBeneficiarioRowChanged" msprop:Generator_RowEvArgName="ClienteBeneficiarioRowChangeEvent" msprop:Generator_RowClassName="ClienteBeneficiarioRow">
+        <xs:element name="ClienteBeneficiario" msprop:Generator_TableClassName="ClienteBeneficiarioDataTable" msprop:Generator_TableVarName="tableClienteBeneficiario" msprop:Generator_RowChangedName="ClienteBeneficiarioRowChanged" msprop:Generator_TablePropName="ClienteBeneficiario" msprop:Generator_RowDeletingName="ClienteBeneficiarioRowDeleting" msprop:Generator_RowChangingName="ClienteBeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="ClienteBeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="ClienteBeneficiarioRowDeleted" msprop:Generator_RowClassName="ClienteBeneficiarioRow" msprop:Generator_UserTableName="ClienteBeneficiario" msprop:Generator_RowEvArgName="ClienteBeneficiarioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Cliente" msprop:Generator_ColumnVarNameInTable="columnID_Cliente" msprop:Generator_ColumnPropNameInRow="ID_Cliente" msprop:Generator_ColumnPropNameInTable="ID_ClienteColumn" msprop:Generator_UserColumnName="ID_Cliente" type="xs:int" />
@@ -1214,7 +1206,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Municipio" msprop:Generator_TableClassName="MunicipioDataTable" msprop:Generator_TableVarName="tableMunicipio" msprop:Generator_TablePropName="Municipio" msprop:Generator_RowDeletingName="MunicipioRowDeleting" msprop:Generator_RowChangingName="MunicipioRowChanging" msprop:Generator_RowEvHandlerName="MunicipioRowChangeEventHandler" msprop:Generator_RowDeletedName="MunicipioRowDeleted" msprop:Generator_UserTableName="Municipio" msprop:Generator_RowChangedName="MunicipioRowChanged" msprop:Generator_RowEvArgName="MunicipioRowChangeEvent" msprop:Generator_RowClassName="MunicipioRow">
+        <xs:element name="Municipio" msprop:Generator_TableClassName="MunicipioDataTable" msprop:Generator_TableVarName="tableMunicipio" msprop:Generator_RowChangedName="MunicipioRowChanged" msprop:Generator_TablePropName="Municipio" msprop:Generator_RowDeletingName="MunicipioRowDeleting" msprop:Generator_RowChangingName="MunicipioRowChanging" msprop:Generator_RowEvHandlerName="MunicipioRowChangeEventHandler" msprop:Generator_RowDeletedName="MunicipioRowDeleted" msprop:Generator_RowClassName="MunicipioRow" msprop:Generator_UserTableName="Municipio" msprop:Generator_RowEvArgName="MunicipioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Municipio" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Municipio" msprop:Generator_ColumnPropNameInRow="ID_Municipio" msprop:Generator_ColumnPropNameInTable="ID_MunicipioColumn" msprop:Generator_UserColumnName="ID_Municipio" type="xs:int" />
@@ -1229,7 +1221,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NoCuenta" msprop:Generator_TableClassName="NoCuentaDataTable" msprop:Generator_TableVarName="tableNoCuenta" msprop:Generator_TablePropName="NoCuenta" msprop:Generator_RowDeletingName="NoCuentaRowDeleting" msprop:Generator_RowChangingName="NoCuentaRowChanging" msprop:Generator_RowEvHandlerName="NoCuentaRowChangeEventHandler" msprop:Generator_RowDeletedName="NoCuentaRowDeleted" msprop:Generator_UserTableName="NoCuenta" msprop:Generator_RowChangedName="NoCuentaRowChanged" msprop:Generator_RowEvArgName="NoCuentaRowChangeEvent" msprop:Generator_RowClassName="NoCuentaRow">
+        <xs:element name="NoCuenta" msprop:Generator_TableClassName="NoCuentaDataTable" msprop:Generator_TableVarName="tableNoCuenta" msprop:Generator_RowChangedName="NoCuentaRowChanged" msprop:Generator_TablePropName="NoCuenta" msprop:Generator_RowDeletingName="NoCuentaRowDeleting" msprop:Generator_RowChangingName="NoCuentaRowChanging" msprop:Generator_RowEvHandlerName="NoCuentaRowChangeEventHandler" msprop:Generator_RowDeletedName="NoCuentaRowDeleted" msprop:Generator_RowClassName="NoCuentaRow" msprop:Generator_UserTableName="NoCuenta" msprop:Generator_RowEvArgName="NoCuentaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NoCuenta" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnNoCuenta" msprop:Generator_ColumnPropNameInRow="NoCuenta" msprop:Generator_ColumnPropNameInTable="NoCuentaColumn" msprop:Generator_UserColumnName="NoCuenta" type="xs:int" />
@@ -1241,7 +1233,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Pago" msprop:Generator_TableClassName="PagoDataTable" msprop:Generator_TableVarName="tablePago" msprop:Generator_TablePropName="Pago" msprop:Generator_RowDeletingName="PagoRowDeleting" msprop:Generator_RowChangingName="PagoRowChanging" msprop:Generator_RowEvHandlerName="PagoRowChangeEventHandler" msprop:Generator_RowDeletedName="PagoRowDeleted" msprop:Generator_UserTableName="Pago" msprop:Generator_RowChangedName="PagoRowChanged" msprop:Generator_RowEvArgName="PagoRowChangeEvent" msprop:Generator_RowClassName="PagoRow">
+        <xs:element name="Pago" msprop:Generator_TableClassName="PagoDataTable" msprop:Generator_TableVarName="tablePago" msprop:Generator_RowChangedName="PagoRowChanged" msprop:Generator_TablePropName="Pago" msprop:Generator_RowDeletingName="PagoRowDeleting" msprop:Generator_RowChangingName="PagoRowChanging" msprop:Generator_RowEvHandlerName="PagoRowChangeEventHandler" msprop:Generator_RowDeletedName="PagoRowDeleted" msprop:Generator_RowClassName="PagoRow" msprop:Generator_UserTableName="Pago" msprop:Generator_RowEvArgName="PagoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NoCuenta" msprop:Generator_ColumnVarNameInTable="columnNoCuenta" msprop:Generator_ColumnPropNameInRow="NoCuenta" msprop:Generator_ColumnPropNameInTable="NoCuentaColumn" msprop:Generator_UserColumnName="NoCuenta" type="xs:int" />
@@ -1251,7 +1243,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Prestamo" msprop:Generator_TableClassName="PrestamoDataTable" msprop:Generator_TableVarName="tablePrestamo" msprop:Generator_TablePropName="Prestamo" msprop:Generator_RowDeletingName="PrestamoRowDeleting" msprop:Generator_RowChangingName="PrestamoRowChanging" msprop:Generator_RowEvHandlerName="PrestamoRowChangeEventHandler" msprop:Generator_RowDeletedName="PrestamoRowDeleted" msprop:Generator_UserTableName="Prestamo" msprop:Generator_RowChangedName="PrestamoRowChanged" msprop:Generator_RowEvArgName="PrestamoRowChangeEvent" msprop:Generator_RowClassName="PrestamoRow">
+        <xs:element name="Prestamo" msprop:Generator_TableClassName="PrestamoDataTable" msprop:Generator_TableVarName="tablePrestamo" msprop:Generator_RowChangedName="PrestamoRowChanged" msprop:Generator_TablePropName="Prestamo" msprop:Generator_RowDeletingName="PrestamoRowDeleting" msprop:Generator_RowChangingName="PrestamoRowChanging" msprop:Generator_RowEvHandlerName="PrestamoRowChangeEventHandler" msprop:Generator_RowDeletedName="PrestamoRowDeleted" msprop:Generator_RowClassName="PrestamoRow" msprop:Generator_UserTableName="Prestamo" msprop:Generator_RowEvArgName="PrestamoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Prestamo" msprop:Generator_ColumnVarNameInTable="columnID_Prestamo" msprop:Generator_ColumnPropNameInRow="ID_Prestamo" msprop:Generator_ColumnPropNameInTable="ID_PrestamoColumn" msprop:Generator_UserColumnName="ID_Prestamo" type="xs:int" />
@@ -1265,7 +1257,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Provincia" msprop:Generator_TableClassName="ProvinciaDataTable" msprop:Generator_TableVarName="tableProvincia" msprop:Generator_TablePropName="Provincia" msprop:Generator_RowDeletingName="ProvinciaRowDeleting" msprop:Generator_RowChangingName="ProvinciaRowChanging" msprop:Generator_RowEvHandlerName="ProvinciaRowChangeEventHandler" msprop:Generator_RowDeletedName="ProvinciaRowDeleted" msprop:Generator_UserTableName="Provincia" msprop:Generator_RowChangedName="ProvinciaRowChanged" msprop:Generator_RowEvArgName="ProvinciaRowChangeEvent" msprop:Generator_RowClassName="ProvinciaRow">
+        <xs:element name="Provincia" msprop:Generator_TableClassName="ProvinciaDataTable" msprop:Generator_TableVarName="tableProvincia" msprop:Generator_RowChangedName="ProvinciaRowChanged" msprop:Generator_TablePropName="Provincia" msprop:Generator_RowDeletingName="ProvinciaRowDeleting" msprop:Generator_RowChangingName="ProvinciaRowChanging" msprop:Generator_RowEvHandlerName="ProvinciaRowChangeEventHandler" msprop:Generator_RowDeletedName="ProvinciaRowDeleted" msprop:Generator_RowClassName="ProvinciaRow" msprop:Generator_UserTableName="Provincia" msprop:Generator_RowEvArgName="ProvinciaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Provincia" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Provincia" msprop:Generator_ColumnPropNameInRow="ID_Provincia" msprop:Generator_ColumnPropNameInTable="ID_ProvinciaColumn" msprop:Generator_UserColumnName="ID_Provincia" type="xs:int" />
@@ -1279,7 +1271,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Sector" msprop:Generator_TableClassName="SectorDataTable" msprop:Generator_TableVarName="tableSector" msprop:Generator_TablePropName="Sector" msprop:Generator_RowDeletingName="SectorRowDeleting" msprop:Generator_RowChangingName="SectorRowChanging" msprop:Generator_RowEvHandlerName="SectorRowChangeEventHandler" msprop:Generator_RowDeletedName="SectorRowDeleted" msprop:Generator_UserTableName="Sector" msprop:Generator_RowChangedName="SectorRowChanged" msprop:Generator_RowEvArgName="SectorRowChangeEvent" msprop:Generator_RowClassName="SectorRow">
+        <xs:element name="Sector" msprop:Generator_TableClassName="SectorDataTable" msprop:Generator_TableVarName="tableSector" msprop:Generator_RowChangedName="SectorRowChanged" msprop:Generator_TablePropName="Sector" msprop:Generator_RowDeletingName="SectorRowDeleting" msprop:Generator_RowChangingName="SectorRowChanging" msprop:Generator_RowEvHandlerName="SectorRowChangeEventHandler" msprop:Generator_RowDeletedName="SectorRowDeleted" msprop:Generator_RowClassName="SectorRow" msprop:Generator_UserTableName="Sector" msprop:Generator_RowEvArgName="SectorRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Sector" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Sector" msprop:Generator_ColumnPropNameInRow="ID_Sector" msprop:Generator_ColumnPropNameInTable="ID_SectorColumn" msprop:Generator_UserColumnName="ID_Sector" type="xs:int" />
@@ -1294,7 +1286,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Sucursal" msprop:Generator_TableClassName="SucursalDataTable" msprop:Generator_TableVarName="tableSucursal" msprop:Generator_TablePropName="Sucursal" msprop:Generator_RowDeletingName="SucursalRowDeleting" msprop:Generator_RowChangingName="SucursalRowChanging" msprop:Generator_RowEvHandlerName="SucursalRowChangeEventHandler" msprop:Generator_RowDeletedName="SucursalRowDeleted" msprop:Generator_UserTableName="Sucursal" msprop:Generator_RowChangedName="SucursalRowChanged" msprop:Generator_RowEvArgName="SucursalRowChangeEvent" msprop:Generator_RowClassName="SucursalRow">
+        <xs:element name="Sucursal" msprop:Generator_TableClassName="SucursalDataTable" msprop:Generator_TableVarName="tableSucursal" msprop:Generator_RowChangedName="SucursalRowChanged" msprop:Generator_TablePropName="Sucursal" msprop:Generator_RowDeletingName="SucursalRowDeleting" msprop:Generator_RowChangingName="SucursalRowChanging" msprop:Generator_RowEvHandlerName="SucursalRowChangeEventHandler" msprop:Generator_RowDeletedName="SucursalRowDeleted" msprop:Generator_RowClassName="SucursalRow" msprop:Generator_UserTableName="Sucursal" msprop:Generator_RowEvArgName="SucursalRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Sucursal" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Sucursal" msprop:Generator_ColumnPropNameInRow="ID_Sucursal" msprop:Generator_ColumnPropNameInTable="ID_SucursalColumn" msprop:Generator_UserColumnName="ID_Sucursal" type="xs:int" />
@@ -1318,7 +1310,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TipoBeneficiario" msprop:Generator_TableClassName="TipoBeneficiarioDataTable" msprop:Generator_TableVarName="tableTipoBeneficiario" msprop:Generator_TablePropName="TipoBeneficiario" msprop:Generator_RowDeletingName="TipoBeneficiarioRowDeleting" msprop:Generator_RowChangingName="TipoBeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="TipoBeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoBeneficiarioRowDeleted" msprop:Generator_UserTableName="TipoBeneficiario" msprop:Generator_RowChangedName="TipoBeneficiarioRowChanged" msprop:Generator_RowEvArgName="TipoBeneficiarioRowChangeEvent" msprop:Generator_RowClassName="TipoBeneficiarioRow">
+        <xs:element name="TipoBeneficiario" msprop:Generator_TableClassName="TipoBeneficiarioDataTable" msprop:Generator_TableVarName="tableTipoBeneficiario" msprop:Generator_RowChangedName="TipoBeneficiarioRowChanged" msprop:Generator_TablePropName="TipoBeneficiario" msprop:Generator_RowDeletingName="TipoBeneficiarioRowDeleting" msprop:Generator_RowChangingName="TipoBeneficiarioRowChanging" msprop:Generator_RowEvHandlerName="TipoBeneficiarioRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoBeneficiarioRowDeleted" msprop:Generator_RowClassName="TipoBeneficiarioRow" msprop:Generator_UserTableName="TipoBeneficiario" msprop:Generator_RowEvArgName="TipoBeneficiarioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_TipoBeneficiario" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoBeneficiario" msprop:Generator_ColumnPropNameInRow="ID_TipoBeneficiario" msprop:Generator_ColumnPropNameInTable="ID_TipoBeneficiarioColumn" msprop:Generator_UserColumnName="ID_TipoBeneficiario" type="xs:int" />
@@ -1332,7 +1324,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TipoCuenta" msprop:Generator_TableClassName="TipoCuentaDataTable" msprop:Generator_TableVarName="tableTipoCuenta" msprop:Generator_TablePropName="TipoCuenta" msprop:Generator_RowDeletingName="TipoCuentaRowDeleting" msprop:Generator_RowChangingName="TipoCuentaRowChanging" msprop:Generator_RowEvHandlerName="TipoCuentaRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoCuentaRowDeleted" msprop:Generator_UserTableName="TipoCuenta" msprop:Generator_RowChangedName="TipoCuentaRowChanged" msprop:Generator_RowEvArgName="TipoCuentaRowChangeEvent" msprop:Generator_RowClassName="TipoCuentaRow">
+        <xs:element name="TipoCuenta" msprop:Generator_TableClassName="TipoCuentaDataTable" msprop:Generator_TableVarName="tableTipoCuenta" msprop:Generator_RowChangedName="TipoCuentaRowChanged" msprop:Generator_TablePropName="TipoCuenta" msprop:Generator_RowDeletingName="TipoCuentaRowDeleting" msprop:Generator_RowChangingName="TipoCuentaRowChanging" msprop:Generator_RowEvHandlerName="TipoCuentaRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoCuentaRowDeleted" msprop:Generator_RowClassName="TipoCuentaRow" msprop:Generator_UserTableName="TipoCuenta" msprop:Generator_RowEvArgName="TipoCuentaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_TipoCuenta" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoCuenta" msprop:Generator_ColumnPropNameInRow="ID_TipoCuenta" msprop:Generator_ColumnPropNameInTable="ID_TipoCuentaColumn" msprop:Generator_UserColumnName="ID_TipoCuenta" type="xs:int" />
@@ -1346,7 +1338,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TipoEntidad" msprop:Generator_TableClassName="TipoEntidadDataTable" msprop:Generator_TableVarName="tableTipoEntidad" msprop:Generator_TablePropName="TipoEntidad" msprop:Generator_RowDeletingName="TipoEntidadRowDeleting" msprop:Generator_RowChangingName="TipoEntidadRowChanging" msprop:Generator_RowEvHandlerName="TipoEntidadRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoEntidadRowDeleted" msprop:Generator_UserTableName="TipoEntidad" msprop:Generator_RowChangedName="TipoEntidadRowChanged" msprop:Generator_RowEvArgName="TipoEntidadRowChangeEvent" msprop:Generator_RowClassName="TipoEntidadRow">
+        <xs:element name="TipoEntidad" msprop:Generator_TableClassName="TipoEntidadDataTable" msprop:Generator_TableVarName="tableTipoEntidad" msprop:Generator_RowChangedName="TipoEntidadRowChanged" msprop:Generator_TablePropName="TipoEntidad" msprop:Generator_RowDeletingName="TipoEntidadRowDeleting" msprop:Generator_RowChangingName="TipoEntidadRowChanging" msprop:Generator_RowEvHandlerName="TipoEntidadRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoEntidadRowDeleted" msprop:Generator_RowClassName="TipoEntidadRow" msprop:Generator_UserTableName="TipoEntidad" msprop:Generator_RowEvArgName="TipoEntidadRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_TipoEntidad" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoEntidad" msprop:Generator_ColumnPropNameInRow="ID_TipoEntidad" msprop:Generator_ColumnPropNameInTable="ID_TipoEntidadColumn" msprop:Generator_UserColumnName="ID_TipoEntidad" type="xs:int" />
@@ -1360,16 +1352,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TipoPrestamo" msprop:Generator_TableClassName="TipoPrestamoDataTable" msprop:Generator_TableVarName="tableTipoPrestamo" msprop:Generator_TablePropName="TipoPrestamo" msprop:Generator_RowDeletingName="TipoPrestamoRowDeleting" msprop:Generator_RowChangingName="TipoPrestamoRowChanging" msprop:Generator_RowEvHandlerName="TipoPrestamoRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoPrestamoRowDeleted" msprop:Generator_UserTableName="TipoPrestamo" msprop:Generator_RowChangedName="TipoPrestamoRowChanged" msprop:Generator_RowEvArgName="TipoPrestamoRowChangeEvent" msprop:Generator_RowClassName="TipoPrestamoRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="ID_TipoPrestamo" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoPrestamo" msprop:Generator_ColumnPropNameInRow="ID_TipoPrestamo" msprop:Generator_ColumnPropNameInTable="ID_TipoPrestamoColumn" msprop:Generator_UserColumnName="ID_TipoPrestamo" type="xs:int" />
-              <xs:element name="Tasa" msprop:Generator_ColumnVarNameInTable="columnTasa" msprop:Generator_ColumnPropNameInRow="Tasa" msprop:Generator_ColumnPropNameInTable="TasaColumn" msprop:Generator_UserColumnName="Tasa" type="xs:decimal" />
-              <xs:element name="Duracion" msprop:Generator_ColumnVarNameInTable="columnDuracion" msprop:Generator_ColumnPropNameInRow="Duracion" msprop:Generator_ColumnPropNameInTable="DuracionColumn" msprop:Generator_UserColumnName="Duracion" type="xs:int" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="TipoTransacciones" msprop:Generator_TableClassName="TipoTransaccionesDataTable" msprop:Generator_TableVarName="tableTipoTransacciones" msprop:Generator_TablePropName="TipoTransacciones" msprop:Generator_RowDeletingName="TipoTransaccionesRowDeleting" msprop:Generator_RowChangingName="TipoTransaccionesRowChanging" msprop:Generator_RowEvHandlerName="TipoTransaccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoTransaccionesRowDeleted" msprop:Generator_UserTableName="TipoTransacciones" msprop:Generator_RowChangedName="TipoTransaccionesRowChanged" msprop:Generator_RowEvArgName="TipoTransaccionesRowChangeEvent" msprop:Generator_RowClassName="TipoTransaccionesRow">
+        <xs:element name="TipoTransacciones" msprop:Generator_TableClassName="TipoTransaccionesDataTable" msprop:Generator_TableVarName="tableTipoTransacciones" msprop:Generator_RowChangedName="TipoTransaccionesRowChanged" msprop:Generator_TablePropName="TipoTransacciones" msprop:Generator_RowDeletingName="TipoTransaccionesRowDeleting" msprop:Generator_RowChangingName="TipoTransaccionesRowChanging" msprop:Generator_RowEvHandlerName="TipoTransaccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoTransaccionesRowDeleted" msprop:Generator_RowClassName="TipoTransaccionesRow" msprop:Generator_UserTableName="TipoTransacciones" msprop:Generator_RowEvArgName="TipoTransaccionesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_TipoTransaccion" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoTransaccion" msprop:Generator_ColumnPropNameInRow="ID_TipoTransaccion" msprop:Generator_ColumnPropNameInTable="ID_TipoTransaccionColumn" msprop:Generator_UserColumnName="ID_TipoTransaccion" type="xs:int" />
@@ -1391,7 +1374,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Transacciones" msprop:Generator_TableClassName="TransaccionesDataTable" msprop:Generator_TableVarName="tableTransacciones" msprop:Generator_TablePropName="Transacciones" msprop:Generator_RowDeletingName="TransaccionesRowDeleting" msprop:Generator_RowChangingName="TransaccionesRowChanging" msprop:Generator_RowEvHandlerName="TransaccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="TransaccionesRowDeleted" msprop:Generator_UserTableName="Transacciones" msprop:Generator_RowChangedName="TransaccionesRowChanged" msprop:Generator_RowEvArgName="TransaccionesRowChangeEvent" msprop:Generator_RowClassName="TransaccionesRow">
+        <xs:element name="Transacciones" msprop:Generator_TableClassName="TransaccionesDataTable" msprop:Generator_TableVarName="tableTransacciones" msprop:Generator_RowChangedName="TransaccionesRowChanged" msprop:Generator_TablePropName="Transacciones" msprop:Generator_RowDeletingName="TransaccionesRowDeleting" msprop:Generator_RowChangingName="TransaccionesRowChanging" msprop:Generator_RowEvHandlerName="TransaccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="TransaccionesRowDeleted" msprop:Generator_RowClassName="TransaccionesRow" msprop:Generator_UserTableName="Transacciones" msprop:Generator_RowEvArgName="TransaccionesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Transacciones" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_Transacciones" msprop:Generator_ColumnPropNameInRow="ID_Transacciones" msprop:Generator_ColumnPropNameInTable="ID_TransaccionesColumn" msprop:Generator_UserColumnName="ID_Transacciones" type="xs:int" />
@@ -1407,6 +1390,20 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
               </xs:element>
               <xs:element name="NoCuenta" msprop:Generator_ColumnVarNameInTable="columnNoCuenta" msprop:Generator_ColumnPropNameInRow="NoCuenta" msprop:Generator_ColumnPropNameInTable="NoCuentaColumn" msprop:Generator_UserColumnName="NoCuenta" type="xs:int" />
               <xs:element name="FechaTransaccion" msprop:Generator_ColumnVarNameInTable="columnFechaTransaccion" msprop:Generator_ColumnPropNameInRow="FechaTransaccion" msprop:Generator_ColumnPropNameInTable="FechaTransaccionColumn" msprop:Generator_UserColumnName="FechaTransaccion" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TipoPrestamo" msprop:Generator_TableClassName="TipoPrestamoDataTable" msprop:Generator_TableVarName="tableTipoPrestamo" msprop:Generator_TablePropName="TipoPrestamo" msprop:Generator_RowDeletingName="TipoPrestamoRowDeleting" msprop:Generator_RowChangingName="TipoPrestamoRowChanging" msprop:Generator_RowEvHandlerName="TipoPrestamoRowChangeEventHandler" msprop:Generator_RowDeletedName="TipoPrestamoRowDeleted" msprop:Generator_UserTableName="TipoPrestamo" msprop:Generator_RowChangedName="TipoPrestamoRowChanged" msprop:Generator_RowEvArgName="TipoPrestamoRowChangeEvent" msprop:Generator_RowClassName="TipoPrestamoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID_TipoPrestamo" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID_TipoPrestamo" msprop:Generator_ColumnPropNameInRow="ID_TipoPrestamo" msprop:Generator_ColumnPropNameInTable="ID_TipoPrestamoColumn" msprop:Generator_UserColumnName="ID_TipoPrestamo" type="xs:int" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1471,10 +1468,6 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
       <xs:selector xpath=".//mstns:TipoEntidad" />
       <xs:field xpath="mstns:ID_TipoEntidad" />
     </xs:unique>
-    <xs:unique name="TipoPrestamo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:TipoPrestamo" />
-      <xs:field xpath="mstns:ID_TipoPrestamo" />
-    </xs:unique>
     <xs:unique name="TipoTransacciones_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:TipoTransacciones" />
       <xs:field xpath="mstns:ID_TipoTransaccion" />
@@ -1483,32 +1476,36 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
       <xs:selector xpath=".//mstns:Transacciones" />
       <xs:field xpath="mstns:ID_Transacciones" />
     </xs:unique>
+    <xs:unique name="TipoPrestamo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TipoPrestamo" />
+      <xs:field xpath="mstns:ID_TipoPrestamo" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__Beneficia__ID_Ti__6C190EBB" msdata:parent="TipoBeneficiario" msdata:child="Beneficiario" msdata:parentkey="ID_TipoBeneficiario" msdata:childkey="ID_TipoBeneficiario" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK__Beneficia__ID_Ti__6C190EBB" msprop:Generator_RelationVarName="relationFK__Beneficia__ID_Ti__6C190EBB" msprop:Generator_UserParentTable="TipoBeneficiario" msprop:Generator_ParentPropName="TipoBeneficiarioRow" />
-      <msdata:Relationship name="FK__Beneficia__NoCue__6B24EA82" msdata:parent="NoCuenta" msdata:child="Beneficiario" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK__Beneficia__NoCue__6B24EA82" msprop:Generator_RelationVarName="relationFK__Beneficia__NoCue__6B24EA82" msprop:Generator_UserParentTable="NoCuenta" msprop:Generator_ParentPropName="NoCuentaRow" />
-      <msdata:Relationship name="FK_Beneficiario_Cliente" msdata:parent="Cliente" msdata:child="Beneficiario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK_Beneficiario_Cliente" msprop:Generator_RelationVarName="relationFK_Beneficiario_Cliente" msprop:Generator_UserParentTable="Cliente" msprop:Generator_ParentPropName="ClienteRow" />
-      <msdata:Relationship name="FK__Usuario__ID_Clie__40058253" msdata:parent="Cliente" msdata:child="Usuario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="Usuario" msprop:Generator_ChildPropName="GetUsuarioRows" msprop:Generator_UserRelationName="FK__Usuario__ID_Clie__40058253" msprop:Generator_RelationVarName="relationFK__Usuario__ID_Clie__40058253" msprop:Generator_UserParentTable="Cliente" msprop:Generator_ParentPropName="ClienteRow" />
-      <msdata:Relationship name="FK__Cliente__ID_Muni__31EC6D26" msdata:parent="Municipio" msdata:child="Cliente" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Muni__31EC6D26" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Muni__31EC6D26" msprop:Generator_UserParentTable="Municipio" msprop:Generator_ParentPropName="MunicipioRow" />
-      <msdata:Relationship name="FK__Cliente__ID_Prov__30F848ED" msdata:parent="Provincia" msdata:child="Cliente" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Prov__30F848ED" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Prov__30F848ED" msprop:Generator_UserParentTable="Provincia" msprop:Generator_ParentPropName="ProvinciaRow" />
-      <msdata:Relationship name="FK__Cliente__ID_Sect__32E0915F" msdata:parent="Sector" msdata:child="Cliente" msdata:parentkey="ID_Sector" msdata:childkey="ID_Sector" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Sect__32E0915F" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Sect__32E0915F" msprop:Generator_UserParentTable="Sector" msprop:Generator_ParentPropName="SectorRow" />
-      <msdata:Relationship name="FK__ClienteBe__ID_Be__6FE99F9F" msdata:parent="Beneficiario" msdata:child="ClienteBeneficiario" msdata:parentkey="ID_Beneficiario" msdata:childkey="ID_Beneficiario" msprop:Generator_UserChildTable="ClienteBeneficiario" msprop:Generator_ChildPropName="GetClienteBeneficiarioRows" msprop:Generator_UserRelationName="FK__ClienteBe__ID_Be__6FE99F9F" msprop:Generator_ParentPropName="BeneficiarioRow" msprop:Generator_RelationVarName="relationFK__ClienteBe__ID_Be__6FE99F9F" msprop:Generator_UserParentTable="Beneficiario" />
-      <msdata:Relationship name="FK__ClienteBe__ID_Cl__31B762FC" msdata:parent="Cliente" msdata:child="ClienteBeneficiario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="ClienteBeneficiario" msprop:Generator_ChildPropName="GetClienteBeneficiarioRows" msprop:Generator_UserRelationName="FK__ClienteBe__ID_Cl__31B762FC" msprop:Generator_ParentPropName="ClienteRow" msprop:Generator_RelationVarName="relationFK__ClienteBe__ID_Cl__31B762FC" msprop:Generator_UserParentTable="Cliente" />
-      <msdata:Relationship name="FK__Municipio__ID_Pr__32AB8735" msdata:parent="Provincia" msdata:child="Municipio" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Municipio" msprop:Generator_ChildPropName="GetMunicipioRows" msprop:Generator_UserRelationName="FK__Municipio__ID_Pr__32AB8735" msprop:Generator_RelationVarName="relationFK__Municipio__ID_Pr__32AB8735" msprop:Generator_UserParentTable="Provincia" msprop:Generator_ParentPropName="ProvinciaRow" />
-      <msdata:Relationship name="FK__NoCuenta__ID_Cli__3E52440B" msdata:parent="Cliente" msdata:child="NoCuenta" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="NoCuenta" msprop:Generator_ChildPropName="GetNoCuentaRows" msprop:Generator_UserRelationName="FK__NoCuenta__ID_Cli__3E52440B" msprop:Generator_ParentPropName="ClienteRow" msprop:Generator_RelationVarName="relationFK__NoCuenta__ID_Cli__3E52440B" msprop:Generator_UserParentTable="Cliente" />
-      <msdata:Relationship name="FK__NoCuenta__ID_Tip__3F466844" msdata:parent="TipoCuenta" msdata:child="NoCuenta" msdata:parentkey="ID_TipoCuenta" msdata:childkey="ID_TipoCuenta" msprop:Generator_UserChildTable="NoCuenta" msprop:Generator_ChildPropName="GetNoCuentaRows" msprop:Generator_UserRelationName="FK__NoCuenta__ID_Tip__3F466844" msprop:Generator_RelationVarName="relationFK__NoCuenta__ID_Tip__3F466844" msprop:Generator_UserParentTable="TipoCuenta" msprop:Generator_ParentPropName="TipoCuentaRow" />
-      <msdata:Relationship name="FK__Pago__ID_TipoEnt__5070F446" msdata:parent="TipoEntidad" msdata:child="Pago" msdata:parentkey="ID_TipoEntidad" msdata:childkey="ID_TipoEntidad" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__ID_TipoEnt__5070F446" msprop:Generator_RelationVarName="relationFK__Pago__ID_TipoEnt__5070F446" msprop:Generator_UserParentTable="TipoEntidad" msprop:Generator_ParentPropName="TipoEntidadRow" />
-      <msdata:Relationship name="FK__Pago__ID_Transac__5165187F" msdata:parent="Transacciones" msdata:child="Pago" msdata:parentkey="ID_Transacciones" msdata:childkey="ID_Transacciones" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__ID_Transac__5165187F" msprop:Generator_RelationVarName="relationFK__Pago__ID_Transac__5165187F" msprop:Generator_UserParentTable="Transacciones" msprop:Generator_ParentPropName="TransaccionesRow" />
-      <msdata:Relationship name="FK__Pago__NoCuenta__4F7CD00D" msdata:parent="NoCuenta" msdata:child="Pago" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__NoCuenta__4F7CD00D" msprop:Generator_ParentPropName="NoCuentaRow" msprop:Generator_RelationVarName="relationFK__Pago__NoCuenta__4F7CD00D" msprop:Generator_UserParentTable="NoCuenta" />
+      <msdata:Relationship name="FK__Beneficia__ID_Ti__6C190EBB" msdata:parent="TipoBeneficiario" msdata:child="Beneficiario" msdata:parentkey="ID_TipoBeneficiario" msdata:childkey="ID_TipoBeneficiario" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK__Beneficia__ID_Ti__6C190EBB" msprop:Generator_ParentPropName="TipoBeneficiarioRow" msprop:Generator_RelationVarName="relationFK__Beneficia__ID_Ti__6C190EBB" msprop:Generator_UserParentTable="TipoBeneficiario" />
+      <msdata:Relationship name="FK__Beneficia__NoCue__6B24EA82" msdata:parent="NoCuenta" msdata:child="Beneficiario" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK__Beneficia__NoCue__6B24EA82" msprop:Generator_ParentPropName="NoCuentaRow" msprop:Generator_RelationVarName="relationFK__Beneficia__NoCue__6B24EA82" msprop:Generator_UserParentTable="NoCuenta" />
+      <msdata:Relationship name="FK_Beneficiario_Cliente" msdata:parent="Cliente" msdata:child="Beneficiario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="Beneficiario" msprop:Generator_ChildPropName="GetBeneficiarioRows" msprop:Generator_UserRelationName="FK_Beneficiario_Cliente" msprop:Generator_ParentPropName="ClienteRow" msprop:Generator_RelationVarName="relationFK_Beneficiario_Cliente" msprop:Generator_UserParentTable="Cliente" />
+      <msdata:Relationship name="FK__Usuario__ID_Clie__40058253" msdata:parent="Cliente" msdata:child="Usuario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="Usuario" msprop:Generator_ChildPropName="GetUsuarioRows" msprop:Generator_UserRelationName="FK__Usuario__ID_Clie__40058253" msprop:Generator_ParentPropName="ClienteRow" msprop:Generator_RelationVarName="relationFK__Usuario__ID_Clie__40058253" msprop:Generator_UserParentTable="Cliente" />
+      <msdata:Relationship name="FK__Cliente__ID_Muni__31EC6D26" msdata:parent="Municipio" msdata:child="Cliente" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Muni__31EC6D26" msprop:Generator_ParentPropName="MunicipioRow" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Muni__31EC6D26" msprop:Generator_UserParentTable="Municipio" />
+      <msdata:Relationship name="FK__Cliente__ID_Prov__30F848ED" msdata:parent="Provincia" msdata:child="Cliente" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Prov__30F848ED" msprop:Generator_ParentPropName="ProvinciaRow" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Prov__30F848ED" msprop:Generator_UserParentTable="Provincia" />
+      <msdata:Relationship name="FK__Cliente__ID_Sect__32E0915F" msdata:parent="Sector" msdata:child="Cliente" msdata:parentkey="ID_Sector" msdata:childkey="ID_Sector" msprop:Generator_UserChildTable="Cliente" msprop:Generator_ChildPropName="GetClienteRows" msprop:Generator_UserRelationName="FK__Cliente__ID_Sect__32E0915F" msprop:Generator_ParentPropName="SectorRow" msprop:Generator_RelationVarName="relationFK__Cliente__ID_Sect__32E0915F" msprop:Generator_UserParentTable="Sector" />
+      <msdata:Relationship name="FK__ClienteBe__ID_Be__6FE99F9F" msdata:parent="Beneficiario" msdata:child="ClienteBeneficiario" msdata:parentkey="ID_Beneficiario" msdata:childkey="ID_Beneficiario" msprop:Generator_UserChildTable="ClienteBeneficiario" msprop:Generator_ChildPropName="GetClienteBeneficiarioRows" msprop:Generator_UserRelationName="FK__ClienteBe__ID_Be__6FE99F9F" msprop:Generator_RelationVarName="relationFK__ClienteBe__ID_Be__6FE99F9F" msprop:Generator_UserParentTable="Beneficiario" msprop:Generator_ParentPropName="BeneficiarioRow" />
+      <msdata:Relationship name="FK__ClienteBe__ID_Cl__31B762FC" msdata:parent="Cliente" msdata:child="ClienteBeneficiario" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="ClienteBeneficiario" msprop:Generator_ChildPropName="GetClienteBeneficiarioRows" msprop:Generator_UserRelationName="FK__ClienteBe__ID_Cl__31B762FC" msprop:Generator_RelationVarName="relationFK__ClienteBe__ID_Cl__31B762FC" msprop:Generator_UserParentTable="Cliente" msprop:Generator_ParentPropName="ClienteRow" />
+      <msdata:Relationship name="FK__Municipio__ID_Pr__32AB8735" msdata:parent="Provincia" msdata:child="Municipio" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Municipio" msprop:Generator_ChildPropName="GetMunicipioRows" msprop:Generator_UserRelationName="FK__Municipio__ID_Pr__32AB8735" msprop:Generator_ParentPropName="ProvinciaRow" msprop:Generator_RelationVarName="relationFK__Municipio__ID_Pr__32AB8735" msprop:Generator_UserParentTable="Provincia" />
+      <msdata:Relationship name="FK__NoCuenta__ID_Cli__3E52440B" msdata:parent="Cliente" msdata:child="NoCuenta" msdata:parentkey="ID_Cliente" msdata:childkey="ID_Cliente" msprop:Generator_UserChildTable="NoCuenta" msprop:Generator_ChildPropName="GetNoCuentaRows" msprop:Generator_UserRelationName="FK__NoCuenta__ID_Cli__3E52440B" msprop:Generator_RelationVarName="relationFK__NoCuenta__ID_Cli__3E52440B" msprop:Generator_UserParentTable="Cliente" msprop:Generator_ParentPropName="ClienteRow" />
+      <msdata:Relationship name="FK__NoCuenta__ID_Tip__3F466844" msdata:parent="TipoCuenta" msdata:child="NoCuenta" msdata:parentkey="ID_TipoCuenta" msdata:childkey="ID_TipoCuenta" msprop:Generator_UserChildTable="NoCuenta" msprop:Generator_ChildPropName="GetNoCuentaRows" msprop:Generator_UserRelationName="FK__NoCuenta__ID_Tip__3F466844" msprop:Generator_ParentPropName="TipoCuentaRow" msprop:Generator_RelationVarName="relationFK__NoCuenta__ID_Tip__3F466844" msprop:Generator_UserParentTable="TipoCuenta" />
+      <msdata:Relationship name="FK__Pago__ID_TipoEnt__5070F446" msdata:parent="TipoEntidad" msdata:child="Pago" msdata:parentkey="ID_TipoEntidad" msdata:childkey="ID_TipoEntidad" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__ID_TipoEnt__5070F446" msprop:Generator_ParentPropName="TipoEntidadRow" msprop:Generator_RelationVarName="relationFK__Pago__ID_TipoEnt__5070F446" msprop:Generator_UserParentTable="TipoEntidad" />
+      <msdata:Relationship name="FK__Pago__ID_Transac__5165187F" msdata:parent="Transacciones" msdata:child="Pago" msdata:parentkey="ID_Transacciones" msdata:childkey="ID_Transacciones" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__ID_Transac__5165187F" msprop:Generator_ParentPropName="TransaccionesRow" msprop:Generator_RelationVarName="relationFK__Pago__ID_Transac__5165187F" msprop:Generator_UserParentTable="Transacciones" />
+      <msdata:Relationship name="FK__Pago__NoCuenta__4F7CD00D" msdata:parent="NoCuenta" msdata:child="Pago" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Pago" msprop:Generator_ChildPropName="GetPagoRows" msprop:Generator_UserRelationName="FK__Pago__NoCuenta__4F7CD00D" msprop:Generator_RelationVarName="relationFK__Pago__NoCuenta__4F7CD00D" msprop:Generator_UserParentTable="NoCuenta" msprop:Generator_ParentPropName="NoCuentaRow" />
+      <msdata:Relationship name="FK__Prestamo__NoCuen__45F365D3" msdata:parent="NoCuenta" msdata:child="Prestamo" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Prestamo" msprop:Generator_ChildPropName="GetPrestamoRows" msprop:Generator_UserRelationName="FK__Prestamo__NoCuen__45F365D3" msprop:Generator_RelationVarName="relationFK__Prestamo__NoCuen__45F365D3" msprop:Generator_UserParentTable="NoCuenta" msprop:Generator_ParentPropName="NoCuentaRow" />
+      <msdata:Relationship name="FK__Sector__ID_Munic__3A4CA8FD" msdata:parent="Municipio" msdata:child="Sector" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Sector" msprop:Generator_ChildPropName="GetSectorRows" msprop:Generator_UserRelationName="FK__Sector__ID_Munic__3A4CA8FD" msprop:Generator_RelationVarName="relationFK__Sector__ID_Munic__3A4CA8FD" msprop:Generator_UserParentTable="Municipio" msprop:Generator_ParentPropName="MunicipioRow" />
+      <msdata:Relationship name="FK__Sucursal__ID_Mun__3B40CD36" msdata:parent="Municipio" msdata:child="Sucursal" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Mun__3B40CD36" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Mun__3B40CD36" msprop:Generator_UserParentTable="Municipio" msprop:Generator_ParentPropName="MunicipioRow" />
+      <msdata:Relationship name="FK__Sucursal__ID_Pro__3C34F16F" msdata:parent="Provincia" msdata:child="Sucursal" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Pro__3C34F16F" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Pro__3C34F16F" msprop:Generator_UserParentTable="Provincia" msprop:Generator_ParentPropName="ProvinciaRow" />
+      <msdata:Relationship name="FK__Sucursal__ID_Sec__3D2915A8" msdata:parent="Sector" msdata:child="Sucursal" msdata:parentkey="ID_Sector" msdata:childkey="ID_Sector" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Sec__3D2915A8" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Sec__3D2915A8" msprop:Generator_UserParentTable="Sector" msprop:Generator_ParentPropName="SectorRow" />
+      <msdata:Relationship name="FK__Transacci__ID_Ti__3E1D39E1" msdata:parent="TipoTransacciones" msdata:child="Transacciones" msdata:parentkey="ID_TipoTransaccion" msdata:childkey="ID_TipoTransaccion" msprop:Generator_UserChildTable="Transacciones" msprop:Generator_ChildPropName="GetTransaccionesRows" msprop:Generator_UserRelationName="FK__Transacci__ID_Ti__3E1D39E1" msprop:Generator_RelationVarName="relationFK__Transacci__ID_Ti__3E1D39E1" msprop:Generator_UserParentTable="TipoTransacciones" msprop:Generator_ParentPropName="TipoTransaccionesRow" />
+      <msdata:Relationship name="FK__Transacci__NoCue__4BAC3F29" msdata:parent="NoCuenta" msdata:child="Transacciones" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Transacciones" msprop:Generator_ChildPropName="GetTransaccionesRows" msprop:Generator_UserRelationName="FK__Transacci__NoCue__4BAC3F29" msprop:Generator_RelationVarName="relationFK__Transacci__NoCue__4BAC3F29" msprop:Generator_UserParentTable="NoCuenta" msprop:Generator_ParentPropName="NoCuentaRow" />
       <msdata:Relationship name="FK__Prestamo__ID_Tip__44FF419A" msdata:parent="TipoPrestamo" msdata:child="Prestamo" msdata:parentkey="ID_TipoPrestamo" msdata:childkey="ID_TipoPrestamo" msprop:Generator_UserChildTable="Prestamo" msprop:Generator_ChildPropName="GetPrestamoRows" msprop:Generator_UserRelationName="FK__Prestamo__ID_Tip__44FF419A" msprop:Generator_RelationVarName="relationFK__Prestamo__ID_Tip__44FF419A" msprop:Generator_UserParentTable="TipoPrestamo" msprop:Generator_ParentPropName="TipoPrestamoRow" />
-      <msdata:Relationship name="FK__Prestamo__NoCuen__45F365D3" msdata:parent="NoCuenta" msdata:child="Prestamo" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Prestamo" msprop:Generator_ChildPropName="GetPrestamoRows" msprop:Generator_UserRelationName="FK__Prestamo__NoCuen__45F365D3" msprop:Generator_ParentPropName="NoCuentaRow" msprop:Generator_RelationVarName="relationFK__Prestamo__NoCuen__45F365D3" msprop:Generator_UserParentTable="NoCuenta" />
-      <msdata:Relationship name="FK__Sector__ID_Munic__3A4CA8FD" msdata:parent="Municipio" msdata:child="Sector" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Sector" msprop:Generator_ChildPropName="GetSectorRows" msprop:Generator_UserRelationName="FK__Sector__ID_Munic__3A4CA8FD" msprop:Generator_ParentPropName="MunicipioRow" msprop:Generator_RelationVarName="relationFK__Sector__ID_Munic__3A4CA8FD" msprop:Generator_UserParentTable="Municipio" />
-      <msdata:Relationship name="FK__Sucursal__ID_Mun__3B40CD36" msdata:parent="Municipio" msdata:child="Sucursal" msdata:parentkey="ID_Municipio" msdata:childkey="ID_Municipio" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Mun__3B40CD36" msprop:Generator_ParentPropName="MunicipioRow" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Mun__3B40CD36" msprop:Generator_UserParentTable="Municipio" />
-      <msdata:Relationship name="FK__Sucursal__ID_Pro__3C34F16F" msdata:parent="Provincia" msdata:child="Sucursal" msdata:parentkey="ID_Provincia" msdata:childkey="ID_Provincia" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Pro__3C34F16F" msprop:Generator_ParentPropName="ProvinciaRow" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Pro__3C34F16F" msprop:Generator_UserParentTable="Provincia" />
-      <msdata:Relationship name="FK__Sucursal__ID_Sec__3D2915A8" msdata:parent="Sector" msdata:child="Sucursal" msdata:parentkey="ID_Sector" msdata:childkey="ID_Sector" msprop:Generator_UserChildTable="Sucursal" msprop:Generator_ChildPropName="GetSucursalRows" msprop:Generator_UserRelationName="FK__Sucursal__ID_Sec__3D2915A8" msprop:Generator_ParentPropName="SectorRow" msprop:Generator_RelationVarName="relationFK__Sucursal__ID_Sec__3D2915A8" msprop:Generator_UserParentTable="Sector" />
-      <msdata:Relationship name="FK__Transacci__ID_Ti__3E1D39E1" msdata:parent="TipoTransacciones" msdata:child="Transacciones" msdata:parentkey="ID_TipoTransaccion" msdata:childkey="ID_TipoTransaccion" msprop:Generator_UserChildTable="Transacciones" msprop:Generator_ChildPropName="GetTransaccionesRows" msprop:Generator_UserRelationName="FK__Transacci__ID_Ti__3E1D39E1" msprop:Generator_ParentPropName="TipoTransaccionesRow" msprop:Generator_RelationVarName="relationFK__Transacci__ID_Ti__3E1D39E1" msprop:Generator_UserParentTable="TipoTransacciones" />
-      <msdata:Relationship name="FK__Transacci__NoCue__4BAC3F29" msdata:parent="NoCuenta" msdata:child="Transacciones" msdata:parentkey="NoCuenta" msdata:childkey="NoCuenta" msprop:Generator_UserChildTable="Transacciones" msprop:Generator_ChildPropName="GetTransaccionesRows" msprop:Generator_UserRelationName="FK__Transacci__NoCue__4BAC3F29" msprop:Generator_ParentPropName="NoCuentaRow" msprop:Generator_RelationVarName="relationFK__Transacci__NoCue__4BAC3F29" msprop:Generator_UserParentTable="NoCuenta" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

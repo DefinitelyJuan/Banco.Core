@@ -11,8 +11,8 @@ namespace CoreAplicacion.CapaServicio
     public class InsertBeneficiario
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        SqlConnection Connection = null;
-        SqlConnection ConnectionBackup = null;
+        //SqlConnection Connection = null;
+        //SqlConnection ConnectionBackup = null;
         SqlCommand cmd = null;
         SqlCommand cmdBackup = null;
         public string ConnectionStrings;
@@ -21,11 +21,11 @@ namespace CoreAplicacion.CapaServicio
 
         public bool Insert(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente)
         {
-            Connection = new SqlConnection();
-            ConnectionBackup = new SqlConnection();
+            SqlConnection Connection = new SqlConnection();
+            SqlConnection ConnectionBackup = new SqlConnection();
             Controlador controlador = new Controlador();
             int response = 0;
-            
+
             ConnectionStrings = controlador.ObtenerConexion(); //Obtengo conexion del core
             ConnectionStringsBackup = controlador.ObtenerConexionBackup(); //Obtengo conexion del backup
             BeneficiarioInsert beneficiario = new BeneficiarioInsert();
@@ -51,7 +51,7 @@ namespace CoreAplicacion.CapaServicio
             }
             catch (Exception err)
             {
-                log.Error(err);               
+                log.Error(err);
                 return false;
             }
             finally
@@ -64,7 +64,7 @@ namespace CoreAplicacion.CapaServicio
                 ConnectionBackup.Open();
                 //ExecuteCommand(ConnectionStringsBackup, beneficiario);
                 cmdBackup = new SqlCommand();
-                cmdBackup.Connection = Connection;
+                cmdBackup.Connection = ConnectionBackup;
                 cmdBackup.CommandType = CommandType.StoredProcedure;
                 cmdBackup.CommandText = "ppInsertBeneficiario";
                 cmdBackup.Parameters.AddWithValue("@NoCuenta", beneficiario.NoCuenta);
@@ -87,38 +87,7 @@ namespace CoreAplicacion.CapaServicio
             else
                 return false;
 
-        }
-        //todo: borrar esta funcion
-        public int ExecuteCommand(string cn, BeneficiarioInsert beneficiario)
-        {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
-            int response = 0;
-            try
-            {
-                Connection.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = Connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ppInsertBeneficiario";                
-                cmd.Parameters.AddWithValue("@NoCuenta", beneficiario.NoCuenta);
-                cmd.Parameters.AddWithValue("@ID_TipoBeneficiario", beneficiario.ID_TipoBeneficiario);
-                cmd.Parameters.AddWithValue("@Nombre", beneficiario.nombre);
-                cmd.Parameters.AddWithValue("@ID_Cliente", beneficiario.ID_Cliente);
-                response = cmd.ExecuteNonQuery();
-                return response;
-            }
-            catch (Exception err)
-            {
-                log.Error(err.Message);
-                return response;
-            }
-            finally
-            {
-                Connection.Close();
-
-            }
-        }
+        }       
 
     }
 }

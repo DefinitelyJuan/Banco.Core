@@ -110,5 +110,35 @@ namespace CoreBancario
         {
 
         }
+
+        private void crearToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmCrearCuenta crearCuenta = new frmCrearCuenta();
+            crearCuenta.MdiParent = this;
+            crearCuenta.Show();
+            crearCuenta.BringToFront();
+        }
+
+        private void editarToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmUpdateCuenta updateCuenta = new frmUpdateCuenta();
+            updateCuenta.MdiParent = this;
+            updateCuenta.Show();
+            updateCuenta.BringToFront();
+        }
+
+        private void mostrarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmMostrarCuentas mostrarCuentas = new frmMostrarCuentas();
+            mostrarCuentas.MdiParent = this;
+            mostrarCuentas.Show();
+            mostrarCuentas.BringToFront();
+        }
     }
 }

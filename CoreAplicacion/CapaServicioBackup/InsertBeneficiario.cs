@@ -36,10 +36,14 @@ namespace CoreAplicacion.CapaServicioBackup
             Connection.ConnectionString = ConnectionStrings;
             try
             {
+                Connection.Open();
                 ExecuteCommand(ConnectionStrings,beneficiario);
+                log.Info($"Insertado Beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}");
                 if(ConnectionStrings == controlador.ObtenerConexionBackup())
                 {
                     InsertBeneficiarioEnBackups(ConnectionStrings, beneficiario);
+                    log.Info($"Insertado backup del beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}");
+
                 }
             }
             catch(Exception err)
@@ -58,12 +62,9 @@ namespace CoreAplicacion.CapaServicioBackup
         }
         public int ExecuteCommand(string cn, BeneficiarioInsert beneficiario)
         {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
             int response = 0;
             try
             {
-                Connection.Open();
                 cmd = new SqlCommand();
                 cmd.Connection = Connection;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -79,11 +80,6 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 log.Error(err.Message);
                 return response;
-            }
-            finally
-            {
-                Connection.Close();
-
             }
         }
         public int InsertBeneficiarioEnBackups(string cn, BeneficiarioInsert beneficiario)
@@ -108,11 +104,6 @@ namespace CoreAplicacion.CapaServicioBackup
             {
                 log.Error(err.Message);
                 return response;
-            }
-            finally
-            {
-                Connection.Close();
-
             }
         }
     }

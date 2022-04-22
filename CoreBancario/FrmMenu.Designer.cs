@@ -44,7 +44,6 @@ namespace CoreBancario
             this.crearToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.prestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tipoTransaccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,8 +158,7 @@ namespace CoreBancario
             this.cuentasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearToolStripMenuItem2,
             this.mostrarToolStripMenuItem1,
-            this.editarToolStripMenuItem2,
-            this.eliminarToolStripMenuItem2});
+            this.editarToolStripMenuItem2});
             this.cuentasToolStripMenuItem.Name = "cuentasToolStripMenuItem";
             this.cuentasToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.cuentasToolStripMenuItem.Text = "Cuentas";
@@ -171,24 +169,21 @@ namespace CoreBancario
             this.crearToolStripMenuItem2.Name = "crearToolStripMenuItem2";
             this.crearToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.crearToolStripMenuItem2.Text = "Crear";
+            this.crearToolStripMenuItem2.Click += new System.EventHandler(this.crearToolStripMenuItem2_Click);
             // 
             // mostrarToolStripMenuItem1
             // 
             this.mostrarToolStripMenuItem1.Name = "mostrarToolStripMenuItem1";
             this.mostrarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.mostrarToolStripMenuItem1.Text = "Mostrar";
+            this.mostrarToolStripMenuItem1.Click += new System.EventHandler(this.mostrarToolStripMenuItem1_Click);
             // 
             // editarToolStripMenuItem2
             // 
             this.editarToolStripMenuItem2.Name = "editarToolStripMenuItem2";
             this.editarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.editarToolStripMenuItem2.Text = "Editar";
-            // 
-            // eliminarToolStripMenuItem2
-            // 
-            this.eliminarToolStripMenuItem2.Name = "eliminarToolStripMenuItem2";
-            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.eliminarToolStripMenuItem2.Text = "Eliminar";
+            this.editarToolStripMenuItem2.Click += new System.EventHandler(this.editarToolStripMenuItem2_Click);
             // 
             // prestamosToolStripMenuItem
             // 
@@ -318,7 +313,6 @@ namespace CoreBancario
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mostrarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mostrarToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem mostrarToolStripMenuItem3;

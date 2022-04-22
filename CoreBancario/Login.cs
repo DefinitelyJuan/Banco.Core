@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using CoreBancario.dsPerfilesTableAdapters;
 namespace CoreBancario
 {
     public partial class Login : Form
@@ -24,12 +24,24 @@ namespace CoreBancario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(txtUser.Text == "a" && txtPass.Text == "1")
+            UsuariosTableAdapter profile = new UsuariosTableAdapter();
+            DataTable profiles = profile.GetData();
+            DataRow[] selectedProfile = profiles.Select($"Usuario = '{txtUser.Text}' and Contraseña = '{txtPass.Text}'");
+            if (selectedProfile.Length > 0)
             {
-                FrmMenu menu = new FrmMenu();
-                this.Hide();
-                menu.Show();
-                
+                if(selectedProfile[0][2].ToString() == "Admin")
+                {
+                    FrmMenu menu = new FrmMenu();
+                    this.Hide();
+                    menu.Show();
+                }
+                if (selectedProfile[0][2].ToString() == "Auditor")
+                {
+                    menuAuditor menu = new menuAuditor();
+                    this.Hide();
+                    menu.Show();
+                }
+
             }
         }
     }

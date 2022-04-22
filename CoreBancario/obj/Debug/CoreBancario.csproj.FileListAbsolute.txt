@@ -41,3 +41,7 @@ C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frm
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarPerfil.resources
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarTransacciones.resources
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmDeleteCliente.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearCuenta.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.menuAuditor.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmUpdateCuenta.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarCuentas.resources

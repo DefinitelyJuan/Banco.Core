@@ -111,11 +111,29 @@
     <Compile Include="CRUDPerfiles\frmDeletePerfil.Designer.cs">
       <DependentUpon>frmDeletePerfil.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDeleteCliente.cs">
+    <Compile Include="CRUDCliente\frmDeleteCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDeleteCliente.Designer.cs">
+    <Compile Include="CRUDCliente\frmDeleteCliente.Designer.cs">
       <DependentUpon>frmDeleteCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRUDCuenta\frmCrearCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUDCuenta\frmCrearCuenta.Designer.cs">
+      <DependentUpon>frmCrearCuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrearTipoTransaccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrearTipoTransaccion.Designer.cs">
+      <DependentUpon>frmCrearTipoTransaccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditarTipoTransaccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditarTipoTransaccion.Designer.cs">
+      <DependentUpon>frmEditarTipoTransaccion.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMenu.cs">
       <SubType>Form</SubType>
@@ -141,17 +159,41 @@
     <Compile Include="CRUDPerfiles\frmUpdatePerfil.Designer.cs">
       <DependentUpon>frmUpdatePerfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="CRUDCuenta\frmMostrarCuentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUDCuenta\frmMostrarCuentas.Designer.cs">
+      <DependentUpon>frmMostrarCuentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMostrarTipoTransacciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMostrarTipoTransacciones.Designer.cs">
+      <DependentUpon>frmMostrarTipoTransacciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMostrarTransacciones.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMostrarTransacciones.Designer.cs">
       <DependentUpon>frmMostrarTransacciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="CRUDCuenta\frmUpdateCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUDCuenta\frmUpdateCuenta.Designer.cs">
+      <DependentUpon>frmUpdateCuenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAuditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAuditor.Designer.cs">
+      <DependentUpon>menuAuditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,8 +213,17 @@
     <EmbeddedResource Include="CRUDPerfiles\frmDeletePerfil.resx">
       <DependentUpon>frmDeletePerfil.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDeleteCliente.resx">
+    <EmbeddedResource Include="CRUDCliente\frmDeleteCliente.resx">
       <DependentUpon>frmDeleteCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRUDCuenta\frmCrearCuenta.resx">
+      <DependentUpon>frmCrearCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrearTipoTransaccion.resx">
+      <DependentUpon>frmCrearTipoTransaccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarTipoTransaccion.resx">
+      <DependentUpon>frmEditarTipoTransaccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
@@ -186,11 +237,23 @@
     <EmbeddedResource Include="CRUDPerfiles\frmUpdatePerfil.resx">
       <DependentUpon>frmUpdatePerfil.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CRUDCuenta\frmMostrarCuentas.resx">
+      <DependentUpon>frmMostrarCuentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMostrarTipoTransacciones.resx">
+      <DependentUpon>frmMostrarTipoTransacciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMostrarTransacciones.resx">
       <DependentUpon>frmMostrarTransacciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CRUDCuenta\frmUpdateCuenta.resx">
+      <DependentUpon>frmUpdateCuenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuAuditor.resx">
+      <DependentUpon>menuAuditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

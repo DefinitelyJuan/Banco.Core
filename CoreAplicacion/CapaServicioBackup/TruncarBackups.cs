@@ -17,6 +17,7 @@ namespace CoreAplicacion.CapaServicioBackup
         {
             Controlador controlador = new Controlador();
             bool done = false;
+            Connection = new SqlConnection();
             Connection.ConnectionString = controlador.ObtenerConexionBackup();
             try
             {
