@@ -128,6 +128,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="JsonClases\BeneficiarioInsert.cs" />
+    <Compile Include="JsonClases\PrestamoInsertData.cs" />
     <Compile Include="JsonClases\TransaccionMismaCuenta.cs" />
     <Compile Include="JsonClases\TransaccionTercero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
