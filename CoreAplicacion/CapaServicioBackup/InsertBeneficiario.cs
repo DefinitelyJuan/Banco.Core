@@ -14,6 +14,7 @@ namespace CoreAplicacion.CapaServicioBackup
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         SqlConnection Connection = null;
         SqlCommand cmd = null;
+        SqlCommand cmdBackup = null;
         public string ConnectionStrings;
         public bool Insert(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente,bool backingup)
         {
@@ -41,9 +42,12 @@ namespace CoreAplicacion.CapaServicioBackup
                 log.Info($"Insertado Beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}");
                 if(ConnectionStrings == controlador.ObtenerConexionBackup())
                 {
-                    InsertBeneficiarioEnBackups(ConnectionStrings, beneficiario);
-                    log.Info($"Insertado backup del beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}");
-
+                    int resp = InsertBeneficiarioEnBackups(ConnectionStrings, beneficiario);
+                    log.Info($"Insertado backup del beneficiario: {beneficiario.id_beneficiario}, {beneficiario.NoCuenta}, filas afectadas: {resp}");
+                }
+                else
+                {
+                    log.Info($"No se inserto backup (backing up?)");
                 }
             }
             catch(Exception err)
@@ -84,20 +88,17 @@ namespace CoreAplicacion.CapaServicioBackup
         }
         public int InsertBeneficiarioEnBackups(string cn, BeneficiarioInsert beneficiario)
         {
-            Connection = new SqlConnection();
-            Connection.ConnectionString = cn;
             int response = 0;
             try
             {
-                Connection.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = Connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ppInsertBackup";
-                cmd.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(beneficiario));
-                cmd.Parameters.AddWithValue("@estado", "Pendiente");
-                cmd.Parameters.AddWithValue("@tipo", 2);
-                response = cmd.ExecuteNonQuery();
+                cmdBackup = new SqlCommand();
+                cmdBackup.Connection = Connection;
+                cmdBackup.CommandType = CommandType.StoredProcedure;
+                cmdBackup.CommandText = "ppInsertBackup";
+                cmdBackup.Parameters.AddWithValue("@jsontext", JsonSerializer.Serialize(beneficiario));
+                cmdBackup.Parameters.AddWithValue("@estado", "Pendiente");
+                cmdBackup.Parameters.AddWithValue("@tipo", 2);
+                response = cmdBackup.ExecuteNonQuery();
                 return response;
             }
             catch (Exception err)

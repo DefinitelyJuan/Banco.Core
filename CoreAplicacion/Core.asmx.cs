@@ -241,7 +241,7 @@ namespace CoreAplicacion
                 {
                     InsertBeneficiario beneficiarionormal = new InsertBeneficiario();
                     result = beneficiarionormal.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente);
-                    if (!result) //No se inserto...
+                    if (result == false) //No se inserto...
                     {
                         throw new Exception("La base de datos del core se encuentra fuera de servicio.");
                     }
@@ -278,50 +278,70 @@ namespace CoreAplicacion
                 TransaccionTercero transact3ero = new TransaccionTercero();
                 BeneficiarioInsert beneficiarioInsert = new BeneficiarioInsert();
                 PrestamoInsertData prestamoInsertData = new PrestamoInsertData();
+                bool data = false;
+                DataSet datatest = null;
                 foreach (DataRow row in tableBackup.Rows)
                 {
                     if (row.IsNull(0))
                         continue;
+
+                    data = false;
+                    datatest = null;
                     switch (row[3].ToString())
                     {
                         case "0": //transaccion misma cuenta
                             {
                                 transactMismaCuenta = JsonSerializer.Deserialize<TransaccionMismaCuenta>(row[1].ToString());
                                 //el todo seria lo de abajo, es EXPERIMENTAL
-                                transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
-                                log.Info($"Se inserto transaccion a misma cuenta (recovery): Cuenta: {transactMismaCuenta.NoCuenta}, Monto: {transactMismaCuenta.Monto}, DbCr: {transactMismaCuenta.DbCr}");
+                                datatest = transaccionBackup.transaccion(transactMismaCuenta.ID_TipoTransaccion, transactMismaCuenta.DbCr, transactMismaCuenta.comentario, transactMismaCuenta.NoCuenta, transactMismaCuenta.Monto, true);
+                                if (datatest.Tables.Count > 0)
+                                {
+                                    log.Info($"Se inserto transaccion a misma cuenta (recovery): Cuenta: {transactMismaCuenta.NoCuenta}, Monto: {transactMismaCuenta.Monto}, DbCr: {transactMismaCuenta.DbCr}");
+
+                                }
                                 break;
                             }
                         case "1": //transaccion 3ero
                             {
 
                                 transact3ero = JsonSerializer.Deserialize<TransaccionTercero>(row[1].ToString());
-                                transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
-                                log.Info($"Se inserto transaccion a tercero (recovery): Origen: {transact3ero.NoCuenta}, Destino: {transact3ero.Entidad}, Monto: {transact3ero.Monto}");
+                                datatest = transaccionBackup.TransaccionATercero(transact3ero.NoCuenta, transact3ero.Entidad, transact3ero.ID_TipoEntidad, transact3ero.ID_TipoTransaccion, transact3ero.DbCr, transact3ero.Comentario, transact3ero.Monto, true);
+
+                                if (datatest.Tables.Count > 0)
+                                {
+                                    log.Info($"Se inserto transaccion a tercero (recovery): Origen: {transact3ero.NoCuenta}, Destino: {transact3ero.Entidad}, Monto: {transact3ero.Monto}");
+
+                                }
                                 break;
                             }
                         case "2": //insert beneficiario
                             {
                                 beneficiarioInsert = JsonSerializer.Deserialize<BeneficiarioInsert>(row[1].ToString());
                                 InsertBeneficiarioBackup backupbeneficiario = new InsertBeneficiarioBackup();
-                                backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
-                                log.Info($"Se inserto beneficiario (recovery): NoCuenta: {beneficiarioInsert.NoCuenta}, Nombre:{beneficiarioInsert.nombre}, IDCliente: {beneficiarioInsert.ID_Cliente}");
+                                data = backupbeneficiario.Insert(beneficiarioInsert.NoCuenta, beneficiarioInsert.ID_TipoBeneficiario, beneficiarioInsert.nombre, beneficiarioInsert.ID_Cliente, true);
+                                if (data == true)
+                                {
+                                    log.Info($"Se inserto beneficiario (recovery): NoCuenta: {beneficiarioInsert.NoCuenta}, Nombre:{beneficiarioInsert.nombre}, IDCliente: {beneficiarioInsert.ID_Cliente}");
 
+                                }
                                 break;
-                            }                       
+                            }
                         default:
                             {
                                 throw new Exception("Error"); //probar poner continue aqui
                             }
                     }
                 }
-
-                TruncateBackup backupsTrunc = new TruncateBackup();
-                bool done = backupsTrunc.Truncate();
-                if (done)
+                if (datatest.Tables.Count > 0 || data == true)
                 {
-                    log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
+                    TruncateBackup backupsTrunc = new TruncateBackup();
+                    bool done = backupsTrunc.Truncate();
+                    if (done)
+                    {
+                        log.Info("Tabla backups truncada, base de datos refrescada tras la caida");
+                    }
                 }
+                
             }
             catch (Exception err)
             {
