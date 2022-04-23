@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
     public partial class frmUpdateCuenta : Form
@@ -26,9 +26,11 @@ namespace CoreBancario
             ClienteTableAdapter cliente = new ClienteTableAdapter();
             NoCuentaTableAdapter noCuenta = new NoCuentaTableAdapter();
             TipoCuentaTableAdapter tipoCuenta = new TipoCuentaTableAdapter();
+            b.NoCuentaTableAdapter nocuentaB = new b.NoCuentaTableAdapter();
             int idCliente = (int)cliente.getClienteByCedula(txtCedula.Text);
             int idTipoCuenta = (int)tipoCuenta.getIDTipoCuentaByName(comboBox1.Text);
             noCuenta.Update(idCliente, idTipoCuenta,int.Parse(txtNoCuenta.Text));
+            nocuentaB.Update(idCliente, idTipoCuenta,int.Parse(txtNoCuenta.Text));
             MessageBox.Show("Cuenta actualizada");
             log.Info($"Cuenta actualizada: {txtNoCuenta.Text}");
         }

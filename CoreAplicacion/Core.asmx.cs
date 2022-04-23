@@ -28,6 +28,7 @@ namespace CoreAplicacion
         [WebMethod]
         public DataSet Autenticacion(string usuario, string contraseña, int pin, string clave)
         {
+            log.Info($"Request de autenticación por parte del usuarui {usuario}");
             DataSet empty = null;
             if(clave == "Droog ethereal develop 269138")
             {
@@ -48,7 +49,7 @@ namespace CoreAplicacion
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
                     //Bloque de carga del backup
-
+                    log.Info("Proceso completado, enviando dataset de respuesta...");
                     return auth;
                 }
                 catch (Exception err)
@@ -58,6 +59,7 @@ namespace CoreAplicacion
                         log.Error($"Error en Autenticacion: {err.Message}");
                         AutenticacionBackup backupAuth = new AutenticacionBackup();
                         DataSet authbackup = backupAuth.Autenticarse(usuario, contraseña, pin);
+                        log.Info("Proceso completado, enviando dataset de respuesta desde backup...");
                         return authbackup;
                     }
                     catch (Exception error)
@@ -76,6 +78,7 @@ namespace CoreAplicacion
         [WebMethod]
         public DataSet Transaccion(int ID_TipoTransaccion, int DbCr, string Comentario, int NoCuenta, decimal Monto, string clave)
         {
+            log.Info($"Request para insertar transaccion en la cuenta {NoCuenta} con monto {Monto}");
             DataSet empty = null;
             if (clave == "Droog ethereal develop 269138")
             {
@@ -100,7 +103,7 @@ namespace CoreAplicacion
                     }
 
                     //Bloque de carga del backup
-
+                    log.Info("Proceso completado, enviando dataset de respuesta...");
                     return dataset;
                 }
                 catch(Exception err)
@@ -111,6 +114,7 @@ namespace CoreAplicacion
                         TransaccionBackup transaccionbackup = new TransaccionBackup();
                         DataSet datasetbackup;
                         datasetbackup = transaccionbackup.transaccion(ID_TipoTransaccion, DbCr, Comentario, NoCuenta, Monto,false);
+                        log.Info("Proceso completado, enviando dataset de respuesta desde backup...");
                         return datasetbackup;
                     }
                     catch(Exception error)
@@ -129,6 +133,7 @@ namespace CoreAplicacion
         [WebMethod]
         public DataSet ObtenerTodasCuentasDiferentes(int ID_Cliente, string clave)
         {
+            log.Info($"Request de todas las cuentas diferentes a las del cliente de id: {ID_Cliente}");
             DataSet empty = null;
             if (clave == "Droog ethereal develop 269138")
             {
@@ -151,7 +156,7 @@ namespace CoreAplicacion
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
                     //Bloque de carga del backup
-
+                    log.Info("Proceso completado, enviando dataset de respuesta...");
                     return dataset;
                 }
                 catch (Exception err)
@@ -161,6 +166,7 @@ namespace CoreAplicacion
                     {
                         recargasBackup recargasbackup = new recargasBackup();
                         DataSet datasetbackup = recargasbackup.TodasCuentasDiferentes(ID_Cliente);
+                        log.Info("Proceso completado, enviando dataset de respuesta desde backup...");
                         return datasetbackup;
                     }
                     catch (Exception error)
@@ -181,6 +187,7 @@ namespace CoreAplicacion
         [WebMethod]
         public DataSet TransaccionATercero(int NoCuenta, int Entidad, int ID_TipoEntidad, int ID_TipoTransaccion, int DbCr, string Comentario, decimal Monto, string clave)
         {
+            log.Info($"Request de insertar transferencia con origen {NoCuenta}, destinatario {Entidad} y monto {Monto}");
             DataSet empty = null;
             if (clave == "Droog ethereal develop 269138")
             {
@@ -206,7 +213,7 @@ namespace CoreAplicacion
                     }
 
                    //Bloque de carga del backup
-                    
+                    log.Info("Proceso completado, enviando dataset de respuesta...");
                     return dataset;
 
                 }
@@ -217,6 +224,7 @@ namespace CoreAplicacion
                     {
                         TransaccionBackup transaccionbackup = new TransaccionBackup();
                         DataSet datasetbackup = transaccionbackup.TransaccionATercero(NoCuenta, Entidad, ID_TipoEntidad, ID_TipoTransaccion, DbCr, Comentario, Monto, false);
+                        log.Info("Proceso completado, enviando dataset de respuesta desde backup...");
                         return datasetbackup;
                     }
                     catch (Exception error)
@@ -237,6 +245,7 @@ namespace CoreAplicacion
         [WebMethod]
         public bool InsertarBeneficiario(int NoCuenta, int ID_TipoBeneficiario, string Nombre, int ID_Cliente, string clave)
         {
+            log.Info($"Request para insertar beneficiario de nombre {Nombre} para la cuenta {NoCuenta}");
             //TODO: Que devuelva dataset/datarow
             if (clave == "Droog ethereal develop 269138")
             {
@@ -259,6 +268,7 @@ namespace CoreAplicacion
                         log.Info("Iniciando Restauracion de datos");
                         RestauracionDeDatos(backup, transaccionBackup);
                     }
+                    log.Info("Proceso completado, enviando respuesta...");
                     //Bloque de carga del backup
                 }
                 catch (Exception err)
@@ -266,8 +276,9 @@ namespace CoreAplicacion
                     log.Error($"Error en Insertar Beneficiario: {err.Message}");
                     InsertBeneficiarioBackup beneficiariohandler = new InsertBeneficiarioBackup();
                     result = beneficiariohandler.Insert(NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente, false);
+                    log.Info("Proceso completado desde backup, enviando respuesta...");
+
                 }
-                
                 return result;
             }
             else

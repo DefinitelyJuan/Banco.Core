@@ -43,9 +43,9 @@ namespace CoreBancario
             this.label4.Font = new System.Drawing.Font("Lato", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(305, 61);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 33);
+            this.label4.Size = new System.Drawing.Size(161, 33);
             this.label4.TabIndex = 37;
-            this.label4.Text = "Update Perfil";
+            this.label4.Text = "Delete Perfil";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtPass
@@ -54,6 +54,7 @@ namespace CoreBancario
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(100, 20);
             this.txtPass.TabIndex = 36;
+            this.txtPass.UseSystemPasswordChar = true;
             // 
             // label1
             // 

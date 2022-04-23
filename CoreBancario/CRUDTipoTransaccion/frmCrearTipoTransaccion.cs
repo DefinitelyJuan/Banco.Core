@@ -9,17 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
-    public partial class frmEditarTipoTransaccion : Form
+    public partial class frmCrearTipoTransaccion : Form
     {
-        public frmEditarTipoTransaccion()
+        public frmCrearTipoTransaccion()
         {
             InitializeComponent();
         }
 
-        private void frmEditarTipoTransaccion_Load(object sender, EventArgs e)
+        private void frmCrearTipoTransaccion_Load(object sender, EventArgs e)
         {
             Helpers.WindowProperties(this);
         }
@@ -27,7 +27,10 @@ namespace CoreBancario
         private void button1_Click(object sender, EventArgs e)
         {
             TipoTransaccionesTableAdapter tipotransaccion = new TipoTransaccionesTableAdapter();
-            tipotransaccion.Update(txtDescripcion.Text, txtStatus.Text, int.Parse(txtCodigo.Text));
+            b.TipoTransaccionesTableAdapter tipotransaccionB = new b.TipoTransaccionesTableAdapter();
+            tipotransaccion.Insert(int.Parse(txtCodigo.Text),txtDescripcion.Text,txtStatus.Text);
+            tipotransaccionB.Insert(int.Parse(txtCodigo.Text),txtDescripcion.Text,txtStatus.Text);
+
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
     public partial class frmCrearCuenta : Form
@@ -26,9 +26,16 @@ namespace CoreBancario
             ClienteTableAdapter cliente = new ClienteTableAdapter();
             NoCuentaTableAdapter noCuenta = new NoCuentaTableAdapter();
             TipoCuentaTableAdapter tipoCuenta = new TipoCuentaTableAdapter();
+
+            b.ClienteTableAdapter clienteB = new b.ClienteTableAdapter();
+            b.NoCuentaTableAdapter nocuentaB = new b.NoCuentaTableAdapter();
+            b.TipoCuentaTableAdapter tipoCuentaB = new b.TipoCuentaTableAdapter();
+          
+
             int idCliente = (int)cliente.getClienteByCedula(txtNombre.Text);
             int idTipoCuenta = (int)tipoCuenta.getIDTipoCuentaByName(comboBox1.Text); 
             noCuenta.Insert(idCliente, idTipoCuenta);
+            nocuentaB.Insert(idCliente, idTipoCuenta);
             MessageBox.Show("Cuenta insertada");
             log.Info($"Cuenta insertada: {txtNombre.Text}, {comboBox1.Text}");
         }

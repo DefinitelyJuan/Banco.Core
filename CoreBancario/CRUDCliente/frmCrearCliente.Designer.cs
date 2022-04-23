@@ -67,6 +67,8 @@ namespace CoreBancario
             this.provinciaTableAdapter = new CoreBancario.datasetNBTableAdapters.ProvinciaTableAdapter();
             this.municipioTableAdapter = new CoreBancario.datasetNBTableAdapters.MunicipioTableAdapter();
             this.sectorTableAdapter = new CoreBancario.datasetNBTableAdapters.SectorTableAdapter();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sectorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datasetNB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.municipioBindingSource)).BeginInit();
@@ -80,6 +82,7 @@ namespace CoreBancario
             this.txtPin.Name = "txtPin";
             this.txtPin.Size = new System.Drawing.Size(100, 20);
             this.txtPin.TabIndex = 66;
+            this.txtPin.UseSystemPasswordChar = true;
             // 
             // label16
             // 
@@ -335,6 +338,7 @@ namespace CoreBancario
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(100, 20);
             this.txtPass.TabIndex = 43;
+            this.txtPass.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -399,12 +403,37 @@ namespace CoreBancario
             // 
             this.sectorTableAdapter.ClearBeforeFill = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.provinciaBindingSource, "Nombre_Provincia", true));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Cliente",
+            "Admin"});
+            this.comboBox1.Location = new System.Drawing.Point(608, 242);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.TabIndex = 67;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Lato", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(561, 244);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 19);
+            this.label2.TabIndex = 68;
+            this.label2.Text = "Rol";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // frmCrearCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtPin);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -486,5 +515,7 @@ namespace CoreBancario
         private datasetNBTableAdapters.MunicipioTableAdapter municipioTableAdapter;
         private System.Windows.Forms.BindingSource sectorBindingSource;
         private datasetNBTableAdapters.SectorTableAdapter sectorTableAdapter;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

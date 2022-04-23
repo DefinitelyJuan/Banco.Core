@@ -56,5 +56,35 @@ namespace CoreBancario
             mostrarCuentas.Show();
             mostrarCuentas.BringToFront();
         }
+
+        private void mostrarToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmMostrarTipoTransacciones mostrarTTransacciones = new frmMostrarTipoTransacciones();
+            mostrarTTransacciones.MdiParent = this;
+            mostrarTTransacciones.Show();
+            mostrarTTransacciones.BringToFront();
+        }
+
+        private void mostrarToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmMostrarPrestamos mostrarPrestamos = new frmMostrarPrestamos();
+            mostrarPrestamos.MdiParent = this;
+            mostrarPrestamos.Show();
+            mostrarPrestamos.BringToFront();
+        }
+
+        private void verToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            frmMostrarPagos pagos = new frmMostrarPagos();
+            pagos.MdiParent = this;
+            pagos.Show();
+            pagos.BringToFront();
+        }
     }
 }

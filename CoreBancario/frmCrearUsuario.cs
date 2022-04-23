@@ -1,5 +1,4 @@
-﻿using CoreBancario.datasetNBTableAdapters;
-using CoreBancario.Utilidades;
+﻿using CoreBancario.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,25 +8,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
+using CoreBancario.datasetNBTableAdapters;
 namespace CoreBancario
 {
-    public partial class frmCrearTipoTransaccion : Form
+    public partial class frmCrearUsuario : Form
     {
-        public frmCrearTipoTransaccion()
+        public frmCrearUsuario()
         {
             InitializeComponent();
         }
 
-        private void frmCrearTipoTransaccion_Load(object sender, EventArgs e)
+        private void frmCrearUsuario_Load(object sender, EventArgs e)
         {
             Helpers.WindowProperties(this);
+            Helpers.LimitComboBox(comboBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TipoTransaccionesTableAdapter tipotransaccion = new TipoTransaccionesTableAdapter();
-            tipotransaccion.Insert(int.Parse(txtCodigo.Text),txtDescripcion.Text,txtStatus.Text);
+            UsuarioTableAdapter usuario = new UsuarioTableAdapter();
+            //usuario.Insert();
+
+
+
 
         }
     }

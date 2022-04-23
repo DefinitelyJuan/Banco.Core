@@ -32,9 +32,6 @@ namespace CoreBancario
             this.components = new System.ComponentModel.Container();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.datasetNB = new CoreBancario.datasetNB();
-            this.transaccionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.transaccionesTableAdapter = new CoreBancario.datasetNBTableAdapters.TransaccionesTableAdapter();
             this.iDTransaccionesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.montoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iDTipoTransaccionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,9 +39,12 @@ namespace CoreBancario
             this.comentarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noCuentaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaTransaccionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transaccionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.datasetNB = new CoreBancario.datasetNB();
+            this.transaccionesTableAdapter = new CoreBancario.datasetNBTableAdapters.TransaccionesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datasetNB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transaccionesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datasetNB)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -60,6 +60,8 @@ namespace CoreBancario
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -74,22 +76,9 @@ namespace CoreBancario
             this.dataGridView1.DataSource = this.transaccionesBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 54);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(776, 362);
             this.dataGridView1.TabIndex = 48;
-            // 
-            // datasetNB
-            // 
-            this.datasetNB.DataSetName = "datasetNB";
-            this.datasetNB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // transaccionesBindingSource
-            // 
-            this.transaccionesBindingSource.DataMember = "Transacciones";
-            this.transaccionesBindingSource.DataSource = this.datasetNB;
-            // 
-            // transaccionesTableAdapter
-            // 
-            this.transaccionesTableAdapter.ClearBeforeFill = true;
             // 
             // iDTransaccionesDataGridViewTextBoxColumn
             // 
@@ -103,36 +92,56 @@ namespace CoreBancario
             this.montoDataGridViewTextBoxColumn.DataPropertyName = "Monto";
             this.montoDataGridViewTextBoxColumn.HeaderText = "Monto";
             this.montoDataGridViewTextBoxColumn.Name = "montoDataGridViewTextBoxColumn";
+            this.montoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // iDTipoTransaccionDataGridViewTextBoxColumn
             // 
             this.iDTipoTransaccionDataGridViewTextBoxColumn.DataPropertyName = "ID_TipoTransaccion";
             this.iDTipoTransaccionDataGridViewTextBoxColumn.HeaderText = "ID_TipoTransaccion";
             this.iDTipoTransaccionDataGridViewTextBoxColumn.Name = "iDTipoTransaccionDataGridViewTextBoxColumn";
+            this.iDTipoTransaccionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dbCrDataGridViewTextBoxColumn
             // 
             this.dbCrDataGridViewTextBoxColumn.DataPropertyName = "DbCr";
             this.dbCrDataGridViewTextBoxColumn.HeaderText = "DbCr";
             this.dbCrDataGridViewTextBoxColumn.Name = "dbCrDataGridViewTextBoxColumn";
+            this.dbCrDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // comentarioDataGridViewTextBoxColumn
             // 
             this.comentarioDataGridViewTextBoxColumn.DataPropertyName = "Comentario";
             this.comentarioDataGridViewTextBoxColumn.HeaderText = "Comentario";
             this.comentarioDataGridViewTextBoxColumn.Name = "comentarioDataGridViewTextBoxColumn";
+            this.comentarioDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // noCuentaDataGridViewTextBoxColumn
             // 
             this.noCuentaDataGridViewTextBoxColumn.DataPropertyName = "NoCuenta";
             this.noCuentaDataGridViewTextBoxColumn.HeaderText = "NoCuenta";
             this.noCuentaDataGridViewTextBoxColumn.Name = "noCuentaDataGridViewTextBoxColumn";
+            this.noCuentaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // fechaTransaccionDataGridViewTextBoxColumn
             // 
             this.fechaTransaccionDataGridViewTextBoxColumn.DataPropertyName = "FechaTransaccion";
             this.fechaTransaccionDataGridViewTextBoxColumn.HeaderText = "FechaTransaccion";
             this.fechaTransaccionDataGridViewTextBoxColumn.Name = "fechaTransaccionDataGridViewTextBoxColumn";
+            this.fechaTransaccionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // transaccionesBindingSource
+            // 
+            this.transaccionesBindingSource.DataMember = "Transacciones";
+            this.transaccionesBindingSource.DataSource = this.datasetNB;
+            // 
+            // datasetNB
+            // 
+            this.datasetNB.DataSetName = "datasetNB";
+            this.datasetNB.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // transaccionesTableAdapter
+            // 
+            this.transaccionesTableAdapter.ClearBeforeFill = true;
             // 
             // frmMostrarTransacciones
             // 
@@ -145,8 +154,8 @@ namespace CoreBancario
             this.Text = "frmMostrarTransacciones";
             this.Load += new System.EventHandler(this.frmMostrarTransacciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datasetNB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.transaccionesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datasetNB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

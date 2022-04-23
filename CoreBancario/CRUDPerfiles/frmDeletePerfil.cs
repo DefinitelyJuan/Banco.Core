@@ -30,7 +30,7 @@ namespace CoreBancario
                 if (confirmResult == DialogResult.Yes)
                 {
                     usuario.Connection.Open();
-                    int response = usuario.Delete(txtPass.Text, txtUser.Text); //TODO: Confirmation window (ver caja)
+                    int response = usuario.Delete(txtUser.Text, txtPass.Text); //TODO: Confirmation window (ver caja)
                     if (response > 0)
                     {
                         MessageBox.Show("Perfil eliminado");

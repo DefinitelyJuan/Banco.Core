@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
     public partial class frmDeleteCliente : Form
@@ -31,6 +31,9 @@ namespace CoreBancario
         {
             ClienteTableAdapter cliente = new ClienteTableAdapter();
             UsuarioTableAdapter usuario = new UsuarioTableAdapter();
+            b.UsuarioTableAdapter usuarioB = new b.UsuarioTableAdapter();
+
+            b.ClienteTableAdapter clienteB = new b.ClienteTableAdapter();
             ///No cuenta, etc (Todo lo que tenga cliente de foreign key)
             SqlTransaction transaction = null;
 

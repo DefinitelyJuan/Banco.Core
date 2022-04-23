@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
     public partial class frmCrearPerfil : Form
@@ -35,7 +35,7 @@ namespace CoreBancario
             try
             {
                 usuario.Connection.Open();
-                usuario.Insert(txtUser.Text, comboBox1.Text, txtPass.Text); //TODO: usar db local para los users
+                usuario.Insert(txtUser.Text, txtPass.Text, comboBox1.Text); //TODO: usar db local para los users
                 MessageBox.Show("Perfil insertado");
                 log.Info($"Nuevo Perfil: {txtUser}");
                 Helpers.ClearFormControls(this);

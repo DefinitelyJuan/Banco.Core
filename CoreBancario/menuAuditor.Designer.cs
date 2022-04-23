@@ -74,7 +74,7 @@ namespace CoreBancario
             // mostrarToolStripMenuItem
             // 
             this.mostrarToolStripMenuItem.Name = "mostrarToolStripMenuItem";
-            this.mostrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mostrarToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.mostrarToolStripMenuItem.Text = "Mostrar";
             this.mostrarToolStripMenuItem.Click += new System.EventHandler(this.mostrarToolStripMenuItem_Click);
             // 
@@ -89,7 +89,7 @@ namespace CoreBancario
             // verToolStripMenuItem
             // 
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.verToolStripMenuItem.Text = "Mostrar";
             this.verToolStripMenuItem.Click += new System.EventHandler(this.verToolStripMenuItem_Click);
             // 
@@ -104,7 +104,7 @@ namespace CoreBancario
             // mostrarToolStripMenuItem1
             // 
             this.mostrarToolStripMenuItem1.Name = "mostrarToolStripMenuItem1";
-            this.mostrarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.mostrarToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.mostrarToolStripMenuItem1.Text = "Mostrar";
             this.mostrarToolStripMenuItem1.Click += new System.EventHandler(this.mostrarToolStripMenuItem1_Click);
             // 
@@ -119,8 +119,9 @@ namespace CoreBancario
             // mostrarToolStripMenuItem3
             // 
             this.mostrarToolStripMenuItem3.Name = "mostrarToolStripMenuItem3";
-            this.mostrarToolStripMenuItem3.Size = new System.Drawing.Size(115, 22);
+            this.mostrarToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.mostrarToolStripMenuItem3.Text = "Mostrar";
+            this.mostrarToolStripMenuItem3.Click += new System.EventHandler(this.mostrarToolStripMenuItem3_Click);
             // 
             // transaccionesToolStripMenuItem
             // 
@@ -148,8 +149,9 @@ namespace CoreBancario
             // mostrarToolStripMenuItem2
             // 
             this.mostrarToolStripMenuItem2.Name = "mostrarToolStripMenuItem2";
-            this.mostrarToolStripMenuItem2.Size = new System.Drawing.Size(115, 22);
+            this.mostrarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.mostrarToolStripMenuItem2.Text = "Mostrar";
+            this.mostrarToolStripMenuItem2.Click += new System.EventHandler(this.mostrarToolStripMenuItem2_Click);
             // 
             // pagosToolStripMenuItem
             // 
@@ -162,8 +164,9 @@ namespace CoreBancario
             // verToolStripMenuItem2
             // 
             this.verToolStripMenuItem2.Name = "verToolStripMenuItem2";
-            this.verToolStripMenuItem2.Size = new System.Drawing.Size(90, 22);
+            this.verToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.verToolStripMenuItem2.Text = "Ver";
+            this.verToolStripMenuItem2.Click += new System.EventHandler(this.verToolStripMenuItem2_Click);
             // 
             // menuAuditor
             // 

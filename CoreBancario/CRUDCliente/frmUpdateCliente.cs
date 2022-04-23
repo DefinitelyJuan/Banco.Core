@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using b = CoreBancario.datasetNBBackupTableAdapters;
 namespace CoreBancario
 {
     public partial class frmUpdateCliente : Form
@@ -29,6 +29,11 @@ namespace CoreBancario
             SectorTableAdapter sector = new SectorTableAdapter();
             SqlTransaction transaction = null;
 
+            b.ClienteTableAdapter clienteB = new b.ClienteTableAdapter();
+            b.ProvinciaTableAdapter provinciaB = new b.ProvinciaTableAdapter();
+            b.MunicipioTableAdapter municipioB = new b.MunicipioTableAdapter();
+            b.SectorTableAdapter sectorB = new b.SectorTableAdapter();
+
             try
             {
                 cliente.Connection.Open();
@@ -41,6 +46,7 @@ namespace CoreBancario
                 IFormatProvider format = System.Globalization.CultureInfo.GetCultureInfo("en-Us").DateTimeFormat;
                 var dob = (birthSelector.Value).ToString("yyyy-MM-dd", format);
                 cliente.Update(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, dob, idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text), txtCedula.Text,(int)cliente.getClienteByCedula(txtCedula.Text));
+                clienteB.Update(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, dob, idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text), txtCedula.Text,(int)cliente.getClienteByCedula(txtCedula.Text));
                 MessageBox.Show("Cliente actualizado");
                 log.Info($"Cliente actualizado: {txtCedula.Text}");
                 Helpers.ClearFormControls(this);

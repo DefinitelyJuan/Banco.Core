@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CoreBancario.datasetNBTableAdapters;
+using b = CoreBancario.datasetNBBackupTableAdapters;
 using CoreBancario.Utilidades;
 namespace CoreBancario
 {
@@ -31,6 +32,10 @@ namespace CoreBancario
             SectorTableAdapter sector = new SectorTableAdapter();
             SqlTransaction transaction = null;
 
+            b.ClienteTableAdapter clienteB = new b.ClienteTableAdapter();
+            b.ProvinciaTableAdapter provinciaB = new b.ProvinciaTableAdapter();
+            b.MunicipioTableAdapter municipioB = new b.MunicipioTableAdapter();
+            b.SectorTableAdapter sectorB = new b.SectorTableAdapter();
             try
             {
                 cliente.Connection.Open();
@@ -44,6 +49,8 @@ namespace CoreBancario
                 var dob = (birthSelector.Value).ToString("yyyy-MM-dd", format);
                 cliente.ppInsertCliente(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, DateTime.Parse(dob), idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text));
                 cliente.ppInsertUsuario(int.Parse(nextid), txtUser.Text, "Cliente", txtPass.Text, txtPin.Text);
+                clienteB.ppInsertCliente(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, DateTime.Parse(dob), idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text));
+                clienteB.ppInsertUsuario(int.Parse(nextid), txtUser.Text, "Cliente", txtPass.Text, txtPin.Text);
                 transaction.Commit();
                 MessageBox.Show("Cliente insertado");
                 log.Info($"Nuevo cliente y usuario insertados: {txtCedula.Text}, {txtUser}");
@@ -77,6 +84,7 @@ namespace CoreBancario
             Helpers.LimitComboBox(comboProvincia);
             Helpers.LimitComboBox(comboSector);
             Helpers.LimitComboBox(comboSexo);
+            Helpers.LimitComboBox(comboBox1);
 
         }
 
@@ -88,6 +96,10 @@ namespace CoreBancario
             SectorTableAdapter sector = new SectorTableAdapter();
             SqlTransaction transaction = null;
 
+            b.ClienteTableAdapter clienteB = new b.ClienteTableAdapter();
+            b.ProvinciaTableAdapter provinciaB = new b.ProvinciaTableAdapter();
+            b.MunicipioTableAdapter municipioB = new b.MunicipioTableAdapter();
+            b.SectorTableAdapter sectorB = new b.SectorTableAdapter();
             try
             {
                 cliente.Connection.Open();
@@ -100,7 +112,9 @@ namespace CoreBancario
                 IFormatProvider format = System.Globalization.CultureInfo.GetCultureInfo("en-Us").DateTimeFormat;
                 var dob = (birthSelector.Value).ToString("yyyy-MM-dd", format);
                 cliente.ppInsertCliente(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, DateTime.Parse(dob), idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text));
-                cliente.ppInsertUsuario(int.Parse(nextid), txtUser.Text, "Cliente", txtPass.Text, txtPin.Text);
+                cliente.ppInsertUsuario(int.Parse(nextid), txtUser.Text, comboBox1.Text, txtPass.Text, txtPin.Text);
+                clienteB.ppInsertCliente(txtCedula.Text, txtNombre.Text, txtDireccion.Text, comboSexo.Text, DateTime.Parse(dob), idprovincia, idmunicipio, idsector, decimal.Parse(txtIngresos.Text));
+                clienteB.ppInsertUsuario(int.Parse(nextid), txtUser.Text, comboBox1.Text, txtPass.Text, txtPin.Text);
                 transaction.Commit();
                 MessageBox.Show("Cliente insertado");
                 log.Info($"Nuevo cliente y usuario insertados: {txtCedula.Text}, {txtUser}");

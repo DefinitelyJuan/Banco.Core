@@ -14,3 +14,6 @@ The statement has been terminated.
 The statement has been terminated.
 2022-04-21 06:08:21,009 [1] INFO CoreBancario.frmUpdatePerfil - Perfil Actualizado: System.Windows.Forms.TextBox, Text: avjuanCore
 2022-04-21 06:08:40,897 [1] INFO CoreBancario.frmUpdatePerfil - Perfil Actualizado: System.Windows.Forms.TextBox, Text: avJuanC21
+2022-04-22 20:06:14,295 [1] INFO CoreBancario.frmCrearPerfil - Nuevo Perfil: System.Windows.Forms.TextBox, Text: auditorUser
+2022-04-22 20:14:34,152 [1] INFO CoreBancario.frmDeletePerfil - Perfil eliminado: System.Windows.Forms.TextBox, Text: auditorUser
+2022-04-22 20:14:50,589 [1] INFO CoreBancario.frmCrearPerfil - Nuevo Perfil: System.Windows.Forms.TextBox, Text: auditorUser

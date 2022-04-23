@@ -45,3 +45,9 @@ C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frm
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.menuAuditor.resources
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmUpdateCuenta.resources
 C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarCuentas.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearTipoTransaccion.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmEditarTipoTransaccion.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarTipoTransacciones.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarPrestamos.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmMostrarPagos.resources
+C:\Users\moroc\source\repos\CoreBancario\CoreBancario\obj\Debug\CoreBancario.frmCrearUsuario.resources

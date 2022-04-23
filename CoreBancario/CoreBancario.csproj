@@ -83,6 +83,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="datasetNB.cs">
+      <DependentUpon>datasetNB.xsd</DependentUpon>
+    </Compile>
     <Compile Include="datasetNB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,6 +96,11 @@
     </Compile>
     <Compile Include="CRUDCliente\frmCrearCliente.Designer.cs">
       <DependentUpon>frmCrearCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="datasetNBBackup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>datasetNBBackup.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsPerfiles.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -123,17 +131,23 @@
     <Compile Include="CRUDCuenta\frmCrearCuenta.Designer.cs">
       <DependentUpon>frmCrearCuenta.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCrearTipoTransaccion.cs">
+    <Compile Include="CRUDTipoTransaccion\frmCrearTipoTransaccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCrearTipoTransaccion.Designer.cs">
+    <Compile Include="CRUDTipoTransaccion\frmCrearTipoTransaccion.Designer.cs">
       <DependentUpon>frmCrearTipoTransaccion.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEditarTipoTransaccion.cs">
+    <Compile Include="CRUDTipoTransaccion\frmEditarTipoTransaccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditarTipoTransaccion.Designer.cs">
+    <Compile Include="CRUDTipoTransaccion\frmEditarTipoTransaccion.Designer.cs">
       <DependentUpon>frmEditarTipoTransaccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrearUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrearUsuario.Designer.cs">
+      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMenu.cs">
       <SubType>Form</SubType>
@@ -165,16 +179,28 @@
     <Compile Include="CRUDCuenta\frmMostrarCuentas.Designer.cs">
       <DependentUpon>frmMostrarCuentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMostrarTipoTransacciones.cs">
+    <Compile Include="CRUDTipoTransaccion\frmMostrarTipoTransacciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMostrarTipoTransacciones.Designer.cs">
+    <Compile Include="CRUDTipoTransaccion\frmMostrarTipoTransacciones.Designer.cs">
       <DependentUpon>frmMostrarTipoTransacciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMostrarTransacciones.cs">
+    <Compile Include="Mostrar\frmMostrarPagos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMostrarTransacciones.Designer.cs">
+    <Compile Include="Mostrar\frmMostrarPagos.Designer.cs">
+      <DependentUpon>frmMostrarPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mostrar\frmMostrarPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mostrar\frmMostrarPrestamos.Designer.cs">
+      <DependentUpon>frmMostrarPrestamos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mostrar\frmMostrarTransacciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mostrar\frmMostrarTransacciones.Designer.cs">
       <DependentUpon>frmMostrarTransacciones.cs</DependentUpon>
     </Compile>
     <Compile Include="CRUDCuenta\frmUpdateCuenta.cs">
@@ -219,11 +245,14 @@
     <EmbeddedResource Include="CRUDCuenta\frmCrearCuenta.resx">
       <DependentUpon>frmCrearCuenta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCrearTipoTransaccion.resx">
+    <EmbeddedResource Include="CRUDTipoTransaccion\frmCrearTipoTransaccion.resx">
       <DependentUpon>frmCrearTipoTransaccion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditarTipoTransaccion.resx">
+    <EmbeddedResource Include="CRUDTipoTransaccion\frmEditarTipoTransaccion.resx">
       <DependentUpon>frmEditarTipoTransaccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrearUsuario.resx">
+      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
@@ -240,10 +269,16 @@
     <EmbeddedResource Include="CRUDCuenta\frmMostrarCuentas.resx">
       <DependentUpon>frmMostrarCuentas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMostrarTipoTransacciones.resx">
+    <EmbeddedResource Include="CRUDTipoTransaccion\frmMostrarTipoTransacciones.resx">
       <DependentUpon>frmMostrarTipoTransacciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMostrarTransacciones.resx">
+    <EmbeddedResource Include="Mostrar\frmMostrarPagos.resx">
+      <DependentUpon>frmMostrarPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mostrar\frmMostrarPrestamos.resx">
+      <DependentUpon>frmMostrarPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mostrar\frmMostrarTransacciones.resx">
       <DependentUpon>frmMostrarTransacciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CRUDCuenta\frmUpdateCuenta.resx">
@@ -280,6 +315,17 @@
     </None>
     <None Include="datasetNB.xss">
       <DependentUpon>datasetNB.xsd</DependentUpon>
+    </None>
+    <None Include="datasetNBBackup.xsc">
+      <DependentUpon>datasetNBBackup.xsd</DependentUpon>
+    </None>
+    <None Include="datasetNBBackup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>datasetNBBackup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="datasetNBBackup.xss">
+      <DependentUpon>datasetNBBackup.xsd</DependentUpon>
     </None>
     <None Include="dsPerfiles.xsc">
       <DependentUpon>dsPerfiles.xsd</DependentUpon>

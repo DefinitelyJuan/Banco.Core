@@ -8758,7 +8758,7 @@ SELECT ID_Beneficiario, NoCuenta, ID_TipoBeneficiario, Nombre, ID_Cliente FROM B
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9105,7 +9105,7 @@ SELECT ID_Cliente, Usuario, Tipo_Usuario, Contraseña, Pin FROM Usuario WHERE (I
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9528,7 +9528,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9795,7 +9795,7 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> getClienteByCedula(string cedula) {
+        public virtual object getClienteByCedula(string cedula) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((cedula == null)) {
                 throw new global::System.ArgumentNullException("cedula");
@@ -9819,17 +9819,17 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<decimal> idnextcliente() {
+        public virtual object idnextcliente() {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -9847,10 +9847,10 @@ SELECT ID_Cliente, Cedula_Cliente, Nombre_Cliente, Direccion_Cliente, Sexo, Fech
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<decimal>();
+                return null;
             }
             else {
-                return new global::System.Nullable<decimal>(((decimal)(returnValue)));
+                return ((object)(returnValue));
             }
         }
         
@@ -10138,7 +10138,7 @@ SELECT ID_Cliente, ID_Beneficiario FROM ClienteBeneficiario WHERE (ID_Beneficiar
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10443,7 +10443,7 @@ SELECT ID_Municipio, Nombre_Municipio, ID_Provincia FROM Municipio WHERE (ID_Mun
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10620,7 +10620,7 @@ SELECT ID_Municipio, Nombre_Municipio, ID_Provincia FROM Municipio WHERE (ID_Mun
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> getIDMunicipio(string nombremunicipio) {
+        public virtual object getIDMunicipio(string nombremunicipio) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((nombremunicipio == null)) {
                 throw new global::System.ArgumentNullException("nombremunicipio");
@@ -10644,10 +10644,10 @@ SELECT ID_Municipio, Nombre_Municipio, ID_Provincia FROM Municipio WHERE (ID_Mun
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }
@@ -10811,7 +10811,7 @@ SELECT ID_Municipio, Nombre_Municipio, ID_Provincia FROM Municipio WHERE (ID_Mun
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11117,7 +11117,7 @@ SELECT NoCuenta, Entidad, ID_TipoEntidad, ID_Transacciones FROM Pago WHERE (Enti
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11457,7 +11457,7 @@ SELECT ID_Prestamo, Monto, MontoPlazoMax, ID_TipoPrestamo, NoCuenta, Tasa, Durac
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11845,7 +11845,7 @@ SELECT ID_Provincia, Nombre_Provincia FROM Provincia WHERE (ID_Provincia = @ID_P
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12018,7 +12018,7 @@ SELECT ID_Provincia, Nombre_Provincia FROM Provincia WHERE (ID_Provincia = @ID_P
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> getIDProvincia(string nombreprovincia) {
+        public virtual object getIDProvincia(string nombreprovincia) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((nombreprovincia == null)) {
                 throw new global::System.ArgumentNullException("nombreprovincia");
@@ -12042,10 +12042,10 @@ SELECT ID_Provincia, Nombre_Provincia FROM Provincia WHERE (ID_Provincia = @ID_P
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }
@@ -12209,7 +12209,7 @@ SELECT ID_Sector, Nombre_Sector, ID_Municipio FROM Sector WHERE (ID_Sector = @ID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12386,7 +12386,7 @@ SELECT ID_Sector, Nombre_Sector, ID_Municipio FROM Sector WHERE (ID_Sector = @ID
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> getIDSector(string NombreSector) {
+        public virtual object getIDSector(string NombreSector) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((NombreSector == null)) {
                 throw new global::System.ArgumentNullException("NombreSector");
@@ -12410,10 +12410,10 @@ SELECT ID_Sector, Nombre_Sector, ID_Municipio FROM Sector WHERE (ID_Sector = @ID
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }
@@ -12589,7 +12589,7 @@ SELECT ID_Sucursal, Nombre_Sucursal, Direccion_Sucursal, ID_Provincia, ID_Munici
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12947,7 +12947,7 @@ SELECT ID_TipoBeneficiario, TipoBeneficiario FROM TipoBeneficiario WHERE (ID_Tip
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13269,7 +13269,7 @@ SELECT ID_TipoCuenta, Nombre_TipoCuenta FROM TipoCuenta WHERE (ID_TipoCuenta = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13441,7 +13441,7 @@ SELECT ID_TipoCuenta, Nombre_TipoCuenta FROM TipoCuenta WHERE (ID_TipoCuenta = @
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> getIDTipoCuentaByName(string TipoCuenta) {
+        public virtual object getIDTipoCuentaByName(string TipoCuenta) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((TipoCuenta == null)) {
                 throw new global::System.ArgumentNullException("TipoCuenta");
@@ -13465,10 +13465,10 @@ SELECT ID_TipoCuenta, Nombre_TipoCuenta FROM TipoCuenta WHERE (ID_TipoCuenta = @
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }
@@ -13626,7 +13626,7 @@ SELECT ID_TipoEntidad, Nombre_TipoEntidad FROM TipoEntidad WHERE (ID_TipoEntidad
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13949,7 +13949,7 @@ SELECT ID_TipoTransaccion, CodigoTransaccion, Descripcion, Status FROM TipoTrans
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14300,7 +14300,7 @@ SELECT ID_Transacciones, Monto, ID_TipoTransaccion, DbCr, Comentario, NoCuenta, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14667,7 +14667,7 @@ SELECT ID_TipoPrestamo, Descripcion FROM TipoPrestamo WHERE (ID_TipoPrestamo = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::CoreBancario.Properties.Settings.Default.ConnectionString2;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
